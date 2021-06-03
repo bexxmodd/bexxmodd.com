@@ -12,6 +12,14 @@ ul {
   margin: 0;
 }
 
+.container {
+  max-width: 768px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .bg-steel {
   background-color: #da747c;
 }
@@ -31,7 +39,11 @@ ul {
 
 .content-section {
   background: #4d4d4d;
-  padding: 10px 20px;
+  padding: .5rem 1rem;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
   border: 1px solid #dddddd;
   border-radius: 1px;
   margin-bottom: 20px;

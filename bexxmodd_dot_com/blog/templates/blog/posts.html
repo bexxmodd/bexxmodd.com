@@ -1,13 +1,14 @@
 {% extends "blog/base.html" %}
+{% load markdown_extras %}
 {% block content %}
     {% for post in posts %}
     <article class="media content-section">
         <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-2" href="#">{{ post.author }}</a>
-            <small class="text-muted">{{ post.date_posted }}</small>
-          </div>
           <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author.get_full_name }}</a>
+            <small class="text-muted">{{ post.date_posted|date:"N d, Y" }}</small>
+          </div>
           <p class="article-content">{{ post.content }}</p>
         </div>
 
