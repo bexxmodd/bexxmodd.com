@@ -7,10 +7,126 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
+    <style>
+
+h1, h2, h3, h4, h5, h6 {
+  color: #0e0d0d;
+  font-family: 'Cairo', sans-serif;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  font-size: 110%;
+  background: #ffffff;
+  color: #000000;
+  margin-top: 8rem;
+}
+
+p {
+  font-family: 'Cairo', sans-serif;
+}
+
+ul {
+  margin: 0;
+}
+
+.container {
+  max-width: 768px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.bg-steel {
+  background-color: #1f559c;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #c2c2c2;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #0e0d0d;
+  opacity: .5;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #e2e2e2;
+  padding: .5rem 1rem;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+  border: 1px solid #bebebe;
+  border-radius: 1px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #393b57;
+}
+
+a.article-title:hover {
+  color: #95cef0;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e2e2e2
+}
+
+.article-metadata a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+
+  </style>
+
 
     {% if title %}
         <title>Beka Modebadze - {{ title }}</title>
@@ -22,7 +138,7 @@
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container">
-            <a class="navbar-brand mr-6" href="{% url 'blog-about' %}">Beka Modebadze</a>
+            <a class="navbar-brand mr-6" href="{% url 'blog-about' %}" style="color:papayawhip">Beka Modebadze</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -50,7 +166,6 @@
           </div>
         </nav>
     </header>
-    
 <main role="main" class="container">
     <div class="row">
       <div class="col-md-12">
@@ -66,4 +181,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
+</font>
 </html>
