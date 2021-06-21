@@ -60,3 +60,6 @@ def about(request):
 
 def resume(request):
     return render(request, 'blog/resume.html', {'title': 'Resume'})
+
+def projects(request):
+    return render(request, 'blog/projects.html', {'title': 'Projects'})
