@@ -1,31 +1,28 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+{% endif %}
+<h1>Blog</h1>
 <style>
     h1 {text-align: center;}
     h2 {text-align: left;}
     p {text-align: left;}
     div {text-align: center;}
 </style>
-{% if user.is_authenticated %}
-<a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
-{% endif %}
-<style>
-    h1 {text-align: center;}
-</style>
-<h1>Blog</h1>
 <br>
 <br>
     {% for post in posts %}
     <article class="media content-section">
-        <div class="media-body">
+        <section class="media-body">
           <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
           <p class="article-metadata">
             <a class="mr-2" href="#">{{ post.author.get_full_name }}</a>
             <small class="text-muted">{{ post.date_posted|date:"N d, Y" }}</small>
           </p>
-          <p class="article-content">{{ post.content|truncatechars:450|safe }}<a href="{% url 'post-detail' post.id %}">read more</a></p>
-        </div>
+          <p class="article-content">{{ post.content|truncatechars:600|safe }}<a href="{% url 'post-detail' post.id %}">read more</a></p>
+        </section>
       </article>
     {% endfor %}
     {% if is_paginated %}
