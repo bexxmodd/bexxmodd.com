@@ -1,0 +1,279 @@
+<h2> Building a Mini-Shell </h2>
+
+<br>
+
+<p>
+    In the introductory Part 1, we discussed what system processes are, how to spawn them, and how to pass commands and execute them. If you want to review this material first you can 
+    <a href="https://bexxmodd.herokuapp.com/post/1/">click here.</a>
+</p>
+
+<br>
+
+<p>
+    In this section we’ll learn:
+
+    <ul>- What are system signals and how to handle them.</ul>
+    <ul>- What are stdout, stdin, and stderr, and how to use them efficiently.</ul>
+    <ul>- Writing to stdout and reading from stdin, instead of printing and what’s the advantage of doing so.</ul>
+    <ul>- Managing parent and child processes and their execution order.</ul>
+</p>
+
+<br>
+
+<p>
+    To demonstrate the above-listed topics in practice, we’ll be building a UNIX mini-shell, which will be able to take commands from a user in the terminal and execute them. The program will also handle some invalid commands and deal with stucked programs gracefully.
+</p>
+
+<br>
+
+<h2>stdin, stdout, and stderr</h2>
+
+<p>
+    Probably you are familiar with what streams are in computing, if not just like water streams, it refers to the flow of data from source to an endpoint. Streams allow connecting commands, processes, files, etc. There are three special streams:
+</p>
+
+<br>
+
+<p>
+    <ul>- stdin (Standard Input): which takes text as an input.</ul>
+    <ul>- stdout (Standard Output): stores text output in the stdout stream.</ul>
+    <ul>- stderr (Standard Error): When an error occurs during a stream the error message is stored in this stream.</ul>
+</p>
+
+<br>
+
+<p>
+The Linux system is file-oriented. This means nearly all streams are treated as files, and those streams are processed based on the unique identifier code that each file type has. For stdio (collection of standard output, input, and error) assigned values are 0 for stdin, 1 for stdout, and 2 for stderr. If we want to read a stream of text from the command line, in C we use the function <code>read()</code> and supply code 0 as one of the arguments for stdin (Figure 1-a).
+</p>
+
+<br>
+
+<center><img src="https://miro.medium.com/max/2400/1*y3_tArgpKbZp1CiR5MpKeg.png" alt="centered image" width="550"><p>Figure 1-a. Stdin Stdout & Stderr diagram</p></center>
+
+<br>
+
+<p>
+    Reading and writing from <code>stdio</code> is a little bit different in Rust, but fundamentals remain the same. To better demonstrate their use we’ll start writing code for our mini-shell program. Initially, we’ll create a loop that will be asking the user to type in a command that the system will execute. The first two functionalities we need to create are writing to stdout and reading from stdin.
+</p>
+
+<br>
+
+<p>
+    <script src="https://gist.github.com/bexxmodd/d61cd4361b0580b64fc93e9cb51ecf16.js"></script>
+</p>
+
+<br>
+
+<p>
+    We’ll use a standard <code>io</code>> module to write to the terminal. Instead of passing <code>String</code> by copy, the function <code>write_to_stdout()</code> takes a reference to a string slice as an argument. The <code>str</code> is different from <code>String</code>. It’s what Rust refers to as a slice, is a reference to a part of a <code>String</code>. If you want to better understand the difference between those two, I’d recommend reading <a href="https://doc.rust-lang.org/nightly/book/ch04-01-what-is-ownership.html">chapter 4 from Rust's official book.</a>
+</p>
+
+<br>
+
+<p>
+    The <code>write_to_stdout()</code> function returns <code>Result</code> object which can be <code>Ok</code> or <code>Err</code>. As those names suggest if everything goes as planned we’ll return <code>Ok</code> otherwise <code>Err</code> is returned. This procedure is so common in Rust that to return <code>Err</code> we have a special symbol <code>?</code> at the end of the function call that can end up in error.
+</p>
+
+<br>
+
+<p>
+    Inside the function, we call a <code>write()</code> function that fills the text buffer of the <code>stdout</code> and then we flush text on the screen. Inside <code>write()</code> we usa <code>as_ref()</code> method which converts string slice into an ASCII byte literal, as this is what the above-mentioned function expects as an argument.
+</p>
+
+<br>
+
+<p>
+    Next, we need to build a function that will read the user inputted command, and process it. For this, we’ll write a custom function <code>get_user_command()</code> that returns <code>String</code>.
+</p>
+
+<br>
+
+<p>
+    <script src="https://gist.github.com/bexxmodd/f1b15a573ec7267dd88b7811258b1881.js"></script>
+</p>
+
+<br>
+
+<p>
+    The function reads a full line from the terminal and copies a value into an <code>input</code> variable. The <code>read_line()</code> takes mutable reference of the input <code>String</code> variable, dereferences inside the function call, writes user-supplied command, and returns <code>Result</code>. When we read a line from stdin it’s EOL (end of line) terminated, which includes the <code>\n</code> control character at the end and we need to get rid of it before returning input.
+</p>
+
+<br>
+
+<p>
+    Finally, we glue our input and output functions together with our mini-shell program.
+</p>
+
+<br>
+
+<script src="https://gist.github.com/bexxmodd/e033e9d9e4880688a4c1c4b825828b36.js"></script>
+
+<br>
+
+<p>
+    In our <code>main()</code> function we run a loop that prints the shell name to the terminal screen and waits for the user to input the command. The <code>run_shell()</code> writes to stdout using previously defined function by us and handles an error if it occurs during printing. If something goes wrong it notifies a user about it and exits the program with error code 1 (Unsuccessful compilation).
+</p>
+
+<br>
+
+<p>
+    Next, it reads the user-supplied command and passes that command to a newly created process. Then we check the status of the command execution, and if the command was unsuccessful we notify a user that the <i>“command not found”</i> and instead of exiting here, we return to the loop of prompting the user for an input.
+</p>
+
+<br>
+
+<p>
+    Run the program with <code>cargo run</code> and we should see output similar to this:
+</p>
+
+<br>
+
+<center><img src="https://miro.medium.com/max/2400/1*RYlhw2gMUvCkS3eJpvUD3w.png" alt="centered image" width="650"><p></p></center>
+
+<br>
+
+<p>
+    A good question to ask here is why we use read and write functions instead of simply printing to the screen. The reason behind this is that directives like <code>read</code> and <code>write</code> are what’s called <i>Async-Signal Safe</i> functions, while C's <code>printf</code> is not. They can be safely called within a signal handler (which we’ll review next).
+</p>
+
+<br>
+
+<p>
+    The functions that are <i>Async-Signal Safe</i> are guaranteed not to be interrupted or interfered with when some signal is sent. For example, if we are in the middle of <code>println!()</code> call and a signal occurs whose handler itself calls <code>println!()</code> can result in undefined behavior. Because in this case, the output of the two <code>println!()</code> statements would be intertwined.
+</p>
+
+<br>
+
+<h2>System Signals</h2>
+
+<p>
+    To improve our mini-shell we have to handle system signals. Signals in the UNIX environment are sort of notifications that are sent by an operating system to a process to notify about a certain event, which usually ends up interrupting the process. Each signal has a unique name and integer value assigned to it. You can check the full list of signals of your system by typing <code>kill -l</code> in your terminal.
+</p>
+
+<br>
+
+<p>
+    By default, each signal has its handler defined which is a function that is called when a certain signal arrives. We can modify the handling of those signals (which we’ll do for our mini-shell project). However, some of the signal handlers can’t be modified.
+</p>
+
+<br>
+
+<p>
+    For our project will take a look at four following signals:
+</p>
+
+<br>
+
+<ul>- <code>SIGINT</code> which is called by pressing <b>Ctrl+C</b> and causes the system to send a <b>INT</b> signal to the running process. By default this causes the processes to terminate immediately. The Signal code for <code>SIGINT</code> is 2.</ul>
+
+<ul>- <code>SIGQUIT</code> is called by pressing <b>Ctrl+\</b> and will send the <b>QUIT</b> signal to the running process. This also terminates the process but more ungracefully. However, cleanup of absolutely necessary resources that need to be cleaned is performed. The assigned code is 3</ul>
+
+<ul>
+    - <code>SIGALRM</code> is like an alarm clock with a countdown in seconds. If the seconds' count hits zero, any pending alarm is canceled and the <code>SIGALRM</code> signal is sent to the process. The alarm code is 14.
+</ul>
+
+<ul>- <code>SIGKILL</code> is the most forceful signal sent by the system which forces the process to halt. This signal can’t be handled manually by a user but the system will still perform a cleanup after process termination. It has a code 9.</ul>
+
+<br>
+
+<p>
+    Now, it’s time to check how we’ll be handling the above-listed signals in Rust (except <code>SIGKILL</code> for which we can’t change default behavior). For example, if you run <code>cat</code> command in the Linux terminal without a file argument it will get stuck in an infinite loop. When this happens in our mini-shell we’ll rewire the <code>SIGINT</code> signal so it will forward the interrupt signal to the child process. This will only terminate the running loop but will keep our shell program running.
+</p>
+
+<br>
+
+<script src="https://gist.github.com/bexxmodd/7afb177e50f4f78f9a5d8e500b468685.js"></script>
+
+<br>
+
+<p>
+    First, we create an iterator of signals which stores a vector of signal references. Here we indicate which signals are expected to be handled. Next, we need to forward the signal to the child process, the one which is actively running, and perform desired behavior on it. This is done by spawning a new thread that returns a <code>JoinHandler</code>.
+</p>
+
+<br>
+
+<p>
+    This handler will <i>detach</i> a child process after being dropped. This means when <code>SIGINT</code> arrives at the child's process, that process will be separated from the parent and it will only interrupt whatever the child process is doing, while the parent process will continue running. If there is no child process in execution it will do nothing.
+</p>
+
+<br>
+
+<p>
+    We use <code>forever()</code> function on signals iterator which returns an infinite loop over arriving signals. As soon as the signal arrives it will be evaluated with a match-case and if it matches <code>SIGINT</code> it will assert that signal was sent successfully. For any other signal, the iterator will continue to wait for the next signal.
+</p>
+
+<br>
+
+<p>
+    Since we rewired the <code>SIGINT</code> signal to only handle child processes, what if we want to exit the program completely? We’ll handle a different signal and let it print “Goodbye” to the stdout and exit graciously. For this one, we’ll use the <code>SIGQUIT</code> signal, which can be sent from the keyboard by pressing <b>Ctrl + \</b>.
+</p>
+
+<br>
+
+<p>
+    <script src="https://gist.github.com/bexxmodd/6c9d34ff604bfc8fc0e95ed078289842.js"></script>
+</p>
+
+<br>
+
+<p>
+    When the <code>SIGQUIT</code> signal is called it’s matched in our iterator and this calls our <code>write_to_stdout()</code> function. Then program exits with code 0, which in Linux stands for a successful compilation. Notice we are importing <code>SIGNAL</code> consts from <code>signal_hook</code> library, which is a library for easier Unix signal handling.
+</p>
+
+<br>
+
+<p>
+    Finally, we’ll add a small feature to our program. The user will supply an integer at the program's start. This number will be used as a countdown for the program’s execution time. For example, if a user supplies 5, this will invoke <code>alarm(5)</code> when the child process is started. If a function isn’t complete when the countdown ends, our manually defined <code>SIGALRM</code> signal will kill it and return the program to the initial state.
+</p>
+
+<br>
+
+<script src="https://gist.github.com/bexxmodd/186ff45a3450ef9637f4e6c6c385d3e6.js"></script>
+
+<br>
+
+<p>
+    When <code>SIGALRM</code> is matched, first, it will write to the stdout and next, it does a very interesting thing. It will use the <code>signal::kill()</code> function to send the <code>SIGINT</code> signal on a process it operates. But since the same function handles <code>SIGINT</code> by forwarding it to a child process it will only kill the child process and return back to the main program of running mini-shell. Full function:
+</p>
+
+<br>
+
+<script src="https://gist.github.com/bexxmodd/a55827d8c407c6068234823700412bac.js"></script>
+
+<br>
+
+<p>
+    These should be an expected outcome if you run our mini-shell through the terminal:
+</p>
+
+<br>
+
+<center><img src="https://miro.medium.com/max/2400/1*pn1CzSKuvPAH2MJtg115ZA.png" alt="centered image" width="650"><p></p></center>
+
+<br>
+
+<p>
+    You can find a full code of the mini-shell, which includes some additional features besides covered here, in <a href="https://github.com/bexxmodd/systems-with-rust/blob/master/src/main.rs">this GitHub repository</a>.
+</p>
+
+<br>
+
+<h2>Summary</h2>
+
+<br>
+
+<p>
+    Today we learned what are stdin, stdout, and stderr, and how to use them properly. We looked at the common UNIX system signals and manually handled three of them to fit the needs of our mini-shell program. The combined knowledge from <a href="https://bexxmodd.herokuapp.com/post/1/">Part 1</a> allowed us to build a program that executes system commands and handles system signals safely and fast thanks to the Rust language.
+</p>
+
+<br>
+
+<p>
+    In the upcoming parts, we’ll take a look at communicating between processes between pipes and review concurrency. We’ll demonstrate why Rust can be a best choice for this.
+</p>
+
+<br>
+
+<p>
+    <center>...</center>
+</p>

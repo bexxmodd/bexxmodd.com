@@ -1,8 +1,18 @@
 {% extends "blog/base.html" %}
-{% block content %}
 
-    <h1 style="text-align: center;">Resume</h1>
+{% block content %}
+<style>
+    h1 {text-align: center;}
+    h2 {text-align: left;}
+    p {text-align: left;}
+    div {text-align: center;}
+</style>
+<h1>Resume</h1>
+    <br>
+    <br>
+    <div class="content-section" >
     <h2>Educaiton</h2>
+    
     <p style="text-align:left;">
         <b>Master's</b> in Computer Science (MCIT)
         <span style="float:right;">
@@ -35,9 +45,9 @@
     </p>
  
     <p>GPA: 3.9/4.0</p>
+</div>
 
-    <hr size="8" width="100%" color="blue">
-
+<div class="content-section" >
     <h2>Work History</h2>
     <p style="text-align:left;">
         <b>Data Analyst II</b>
@@ -87,20 +97,18 @@
         </span>
     </p>
 
-    <hr size="8" width="100%" color="blue">
-
+</div>
+<div class="content-section" >
     <h2>Tech Skills</h2>
     <p><i>Languages:</i> Python, Java, Rust, C, C++</p>
     <p><i>Databases:</i> MySQL, PostgreSQL, SQLite, MSSQL</p>
     <p><i>OS:</i> Linux, Windows</p>
     <p><i>Misc:</i> Git, Docker</p>
     <p><i>Web (basics):</i> HTML, CSS</p>
+</div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
+<br>
+<br>
+<br>
+<br>
 {% endblock content %}

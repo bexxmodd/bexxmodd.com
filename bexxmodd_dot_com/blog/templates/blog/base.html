@@ -12,28 +12,41 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
 
+    <!-- Font Selection -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
 
     <style>
 
-h1, h2, h3, h4, h5, h6 {
-  color: #0e0d0d;
-  font-family: 'Cairo', sans-serif;
+h1 {
+  color: #320d38;
+  display: inline-flex;
+  font-family: 'Share Tech Mono', monospace;
+  background-color: #f0cc2f;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: bold;
+  font-style: italic;
+  border-radius: 10px 40px 20px;
+}
+
+h2, h3, h4, h5, h6 {
+    color: #00ffdd;
+    font-weight: bold;
+    font-family: 'Share Tech Mono', monospace;
 }
 
 body {
-  font-family: 'Cairo', sans-serif;
+    font-family: 'Fira Mono', monospace;
   font-size: 110%;
-  background: #ffffff;
-  color: #000000;
+  background: #0f1824;
+  color: #faf9d4;
   margin-top: 8rem;
 }
 
 p {
-  font-family: 'Cairo', sans-serif;
+    font-family: 'Fira Mono', monospace;
   margin: 0;
 }
 
@@ -50,16 +63,19 @@ ul {
 }
 
 .bg-steel {
-  background-color: #1f559c;
+  background-color: #0f1824;
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #c2c2c2;
+  color: #f0cc2f;
+  border-radius: 20px 5px 25px;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #0e0d0d;
+  color: #320d38;
+  background-color: #f0cc2f;
   opacity: .5;
+  border-radius: 20px 5px 25px;
 }
 
 .site-header .navbar-nav .nav-link.active {
@@ -67,24 +83,28 @@ ul {
 }
 
 .content-section {
-  background: #e2e2e2;
-  padding: .5rem 1rem;
-    padding-top: 0.5rem;
-    padding-right: 1rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-  border: 1px solid #bebebe;
-  border-radius: 1px;
+  background: #111a27;
+  padding: 4rem 4rem;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+  border: 0.5px solid #f0cc2f;
   margin-bottom: 20px;
+  border-radius: 35px 15px 35px
 }
 
 .article-title {
-  color: #393b57;
+  color: #00ffdd;
+  font-weight: bold;
 }
 
 a.article-title:hover {
-  color: #95cef0;
-  text-decoration: none;
+    display: inline-flex;
+    color: #320d38;
+    background-color: #f0cc2f;
+    border-radius: 5px 25px 25px;
+    opacity: .5;
 }
 
 .article-content {
@@ -100,7 +120,7 @@ a.article-title:hover {
 .article-metadata {
   padding-bottom: 1px;
   margin-bottom: 4px;
-  border-bottom: 1px solid #e2e2e2
+  <!-- border-bottom: 1px solid #e2e2e2 -->
 }
 
 .article-metadata a:hover {
@@ -139,7 +159,7 @@ a.article-title:hover {
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container">
-            <a class="navbar-brand mr-6" href="{% url 'blog-about' %}" style="color:papayawhip">Beka Modebadze</a>
+            <a class="navbar-brand mr-6" href="{% url 'blog-about' %}" style="color:#00ffdd">Beka Modebadze</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -169,7 +189,7 @@ a.article-title:hover {
     </header>
 <main role="main" class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-14">
         {% block content %}{% endblock %}
         </div>
     </div>
