@@ -71,7 +71,7 @@ ul {
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #320d38;
+  color: #490c41;
   background-color: #00ffdd;
   opacity: .5;
   border-radius: 15px 5px 20px;
@@ -101,7 +101,7 @@ ul {
 
 a.article-title:hover {
     display: inline-flex;
-    color: #320d38;
+    color: #490c41;
     background-color: #f0cc2f;
     border-radius: 5px 25px 25px;
     opacity: .5;
@@ -133,18 +133,6 @@ a.article-title:hover {
   vertical-align: middle;
 }
 
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
-}
-
-.account-heading {
-  font-size: 2.5rem;
-}
-
-
   </style>
 
 
@@ -166,19 +154,22 @@ a.article-title:hover {
               <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
                 <a class="nav-item nav-link" href="{% url 'blog-posts' %}">Blog</a>
-                <a class="nav-item nav-link" href="{% url 'blog-resume' %}">Resume</a>
+                <a class="nav-item nav-link" href="{% url 'blog-resume' %}">Resumé</a>
                 <a class="nav-item nav-link" href="{% url 'blog-projects' %}">Projects</a>
               </div>
               <!-- Navbar Right Side -->
               <div class="navbar-nav">
                 <a class="nav-item nav-link" href="https://www.github.com/bexxmodd" alt="github image">
-                    <img src="/static/img/GitHub-Mark-Light-64px.png" width="35", height="35", hspace="2"></a>
+                    <img src="/static/img/GitHub-Mark-Light-64px.png" width="33", height="33", hspace="1"></a>
                 
                 <a class="nav-item nav-link" href="https://www.linkedin.com/in/bmodebadze/" target="_blank">
-                    <img src="/static/img/LI-In-Bug.png" width="35", height="35", hspace="2"></a>
+                    <img src="/static/img/LI-In-Bug.png" width="33", height="33", hspace="1"></a>
 
                 <a class="nav-item nav-link" href="https://twitter.com/bexxmodd" target="_blank">
-                    <img src="/static/img/twitter-64.png" width="35", height="35", hspace="2"></a>
+                    <img src="/static/img/twitter-64.png" width="33", height="33", hspace="1"></a>
+
+                <a class="nav-item nav-link" href="mailto: bexx.modd@gmail.com" target="_blank">
+                    <img src="/static/img/email.png" width="33", height="33", hspace="1"></a>
 
               </div>
             </div>
