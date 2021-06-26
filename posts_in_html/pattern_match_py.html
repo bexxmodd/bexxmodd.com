@@ -1,0 +1,262 @@
+<h1>Pattern Matching in Python 3.10</h1>
+
+<br>
+<p>
+    Finally Gods of Python decided to add a highly requested feature pattern matching. As a part of the <a href="https://docs.python.org/3.10/whatsnew/3.10.html#pep-634-structural-pattern-matching">PEP634</a>, a structural pattern matching feature has been added to Python 3.10 and currently is in beta mode for testing.
+    
+    Why is this a good news and how does structural pattern matching will make Python developer's life easier? In this post I'll:
+
+<br>
+
+    <ul>- Introduce what is a structural pattern matching and it's syntax.</ul>
+    <ul>- What's the difference between <code>switch</code> and <code>match</code> statements?</ul>
+    <ul>- Where does match statement fits in Python and it's advantages over <code>if/elif/else</code> statement</ul>
+</p>
+
+<br>
+
+<p>
+    <h3>Structural Pattern Matching</h3>
+
+    Soon (Official release is plannet in October) we'll see a Python's structural pattern matching with a form of <code>match</code>/<code>case</code> statement. Pattern matching will be available for primitive data types matching, extracting data from more complex data types, and then applying specific instructions based on retrieved values.
+</p>
+
+<br>
+<p>
+    Example syntax for Python's pattern matching:
+
+    <br>
+    <br>
+    <center><img src="https://i.imgur.com/v0dkpDm.png" width=350></a></center>
+</p>
+
+<br>
+<p>
+    When the pattern is evaluated case compares value to the <code>pattern_1</code> if it's true <code>action_1</code> will be executed and the program will break. If evaluated result is false then case #2 will copared to <code>pattern_2</code> and if matched <code>action_2</code> will be executed, etc. up until program reaches <code>_</code> which stands for default execution, if no other match is found.
+</p>
+
+<br>
+<p>
+    If we left out <code>_</code> case from our code and none of the other cases match, default will be a <i>no-op</i> that is similar to <code>pass</code> i.e. no action will be conducted. We can also use a <code>|</code> ("or") operator if we want to evaluate two or more cases for a single action.
+
+    <br>
+    <br>
+    <center><img src="https://i.imgur.com/ML3KkLI.png" width=550></a></center>
+</p>
+
+<br>
+<p>
+    This is a simple review of the syntax of this anticipated feature. Before diving into examples and use cases let's explore what's the difference between <code>switch</code> and <code>match</code> as often these words are used interchangeably but mean two different attributes.
+
+</p>
+
+<br>
+<h3>Switch vs Match</h3>
+
+<p>
+    Many popular programming languages like Java, C, C++ have a switch statement. It is used extensively due to its readability and fast execution speed compared to if/else statements when you have to evaluate multiple if-else cases. On a lower level switch case is executed faster compared to multiple if-else statements.
+</p>
+
+<br>
+<p>
+    This is because the switch evaluates the data type of the subject and creates a look-up/hash table of the expected cases. Then comparison to identify which case to execute can be done in a near-constant time. The difference in runtime is minuscule for 99% of the time but good readability and clean design gives preference to the switch cases in many occasions.
+</p>
+
+<br>
+<p>
+    However, limitations of the switch case is that, for example in C it can't go beyond primitive data types like <code>int</code>, <cdoe>char</cdoe>, and <code>enum</code>. For example, let's look at this simple C code:
+    <br>
+
+<!-- HTML generated using hilite.me -->
+<div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">    #include &lt;stdio.h&gt;</span>
+
+    <span style="color: #6ab825; font-weight: bold">int</span> <span style="color: #447fcf">main</span><span style="color: #d0d0d0">()</span>
+    <span style="color: #d0d0d0">{</span>
+        <span style="color: #6ab825; font-weight: bold">float</span> <span style="color: #d0d0d0">val</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">2.1</span><span style="color: #d0d0d0">;</span>
+        <span style="color: #6ab825; font-weight: bold">switch</span> <span style="color: #d0d0d0">(val)</span> <span style="color: #d0d0d0">{</span>
+            <span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #3677a9">1.1</span>:   <span style="color: #d0d0d0">printf(</span><span style="color: #ed9d13">&quot;Value = %f\n&quot;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">val);</span>
+            <span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #3677a9">2.1</span>:   <span style="color: #d0d0d0">printf(</span><span style="color: #ed9d13">&quot;Value = %f\n&quot;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">val);</span>
+            <span style="color: #d0d0d0">default:</span>    <span style="color: #d0d0d0">printf(</span><span style="color: #ed9d13">&quot;No match found&quot;</span><span style="color: #d0d0d0">);</span>
+        <span style="color: #d0d0d0">}</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+    <span style="color: #d0d0d0">}</span>
+    </pre></div>
+    
+
+</p>
+
+<br>
+<p>
+    If we try to pass a String or a float we'll get a compiler error (though Strings are allowed in Java):
+    <br>
+    <br>
+    <p><code>
+        <p>error: statement requires expression of integer type ('float' invalid)</p>
+    <pre class="tab" style="color:white">   switch (val) {</pre>
+    <pre class="tab" style="color:green">   ^       ~~~</pre>
+<p>1 error generated.</p>
+    </code></p>
+</p>
+
+<br>
+<p>
+    So here is the difference with <code>match</code> statement. It can be used as a statement (to just evaluate primitive data types) and as an expression. What's the difference between statement and expression? The rule of thumb is that statements are instructions. They perform actions. Expressions hold data; they resolve to some value. So we can do more complex pattern evaluations using match statement/expression, which we'll demonstrate below.
+</p>
+
+<br>
+<h3>Match Case Examples</h3>
+<p>
+    Python pattern matching can be used in diverse ways. It can be used as a match statement for the literals and a match expression for more complex situations. We can capture patterns in the following style:
+
+    <br>
+<!-- HTML generated using hilite.me -->
+<div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #d0d0d0">match</span> <span style="color: #d0d0d0">string:</span>
+    <span style="color: #d0d0d0">case</span> <span style="color: #ed9d13">&quot;&quot;</span><span style="color: #d0d0d0">:</span>
+    <span style="color: #24909d">    print</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&#39;The boy has no name&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">    case</span> <span style="color: #ed9d13">&quot;Edward&quot;</span><span style="color: #d0d0d0">:</span>
+    <span style="color: #24909d">    print</span><span style="color: #d0d0d0">(f</span><span style="color: #ed9d13">&#39;His name is {string}&#39;</span><span style="color: #d0d0d0">)</span>
+</pre></div>
+
+    <p>
+        We can use an underscore <code>_</code> as a wildcard. This is a special kind of pattern that always matches but never binds:
+    </p>
+
+    <br>
+    <!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #d0d0d0">match</span> <span style="color: #d0d0d0">point:</span>
+        <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">(x,</span> <span style="color: #d0d0d0">_):</span>
+        <span style="color: #24909d">print</span><span style="color: #d0d0d0">(f</span><span style="color: #ed9d13">&#39;x is located at {x}&#39;</span><span style="color: #d0d0d0">)</span>
+</pre></div>
+
+<br>
+
+<p>
+    Mapping pattern is also a thing that allows matching a key, value pair. It's done by unpacking the iterable where both key and value are evaluated as patterns. The syntax is similar to dictionary display and can even use <code>**rest</code> to extract remaining items from the data:
+</p>
+
+<br>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #d0d0d0">match</span> <span style="color: #d0d0d0">score:</span>
+    <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">{</span><span style="color: #ed9d13">&#39;five&#39;</span><span style="color: #d0d0d0">:</span> <span style="color: #3677a9">5</span><span style="color: #d0d0d0">}:</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">5.1</span>
+    <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">{</span><span style="color: #ed9d13">&#39;four&#39;</span><span style="color: #d0d0d0">:</span> <span style="color: #3677a9">4</span><span style="color: #d0d0d0">}:</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">4.1</span>
+    <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">{**rest}:</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">0.1</span>
+</pre></div>
+
+
+<br>
+
+<p>
+    The variety of patterns we can match allows us to get creative and I'm sure Python community will give us a great use cases. Now, let's look how it compares to the if/else statement and how we can match classes and variaty of other patterns within a single run.
+</p>
+
+
+<br>
+<h3>Match-Case vs If-Elif-Else</h3>
+</p>
+<p>
+    Let's say we've two classes <code>Color</code> that has three mandatory fields for red, green, and blue and <code>StabilizedColor</code> which has all above mantioned fields plus an alpha field. We want to have a function that takes various types of numerical arguments (and not only) and returns <code>StabilizedColor</code> object. This's how we'd implement it using match expression.
+</p>
+
+<br>
+
+<!-- HTML generated using hilite.me -->
+<div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">    from</span> <span style="color: #447fcf; text-decoration: underline">dataclasses</span> <span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #d0d0d0">dataclass</span>
+
+    <span style="color: #ffa500">@dataclass</span>
+    <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Color</span><span style="color: #d0d0d0">:</span>
+        <span style="color: #d0d0d0">red:</span> <span style="color: #24909d">int</span>
+        <span style="color: #d0d0d0">green:</span> <span style="color: #24909d">int</span>
+        <span style="color: #d0d0d0">blue:</span> <span style="color: #24909d">int</span>
+    
+    <span style="color: #ffa500">@dataclass</span>
+    <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">StabilizedColor</span><span style="color: #d0d0d0">:</span>
+        <span style="color: #d0d0d0">red:</span> <span style="color: #24909d">int</span>
+        <span style="color: #d0d0d0">green:</span> <span style="color: #24909d">int</span>
+        <span style="color: #d0d0d0">blue:</span> <span style="color: #24909d">int</span>
+        <span style="color: #d0d0d0">alpha:</span> <span style="color: #24909d">int</span>
+    
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">stabilize_rgb_color</span><span style="color: #d0d0d0">(color)</span> <span style="color: #d0d0d0">-&gt;</span> <span style="color: #d0d0d0">StabilizedColor:</span>
+        <span style="color: #d0d0d0">match</span> <span style="color: #d0d0d0">color:</span>
+            <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">(r,</span> <span style="color: #d0d0d0">g,</span> <span style="color: #d0d0d0">b,</span> <span style="color: #d0d0d0">a):</span>
+                <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">StabilizedColor(r,</span> <span style="color: #d0d0d0">g,</span> <span style="color: #d0d0d0">b,</span> <span style="color: #d0d0d0">a)</span>
+            <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">(r,</span> <span style="color: #d0d0d0">g,</span> <span style="color: #d0d0d0">b):</span>
+                <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">StabilizedColor(r,</span> <span style="color: #d0d0d0">g,</span> <span style="color: #d0d0d0">b,</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">)</span>
+            <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">Color(r,</span> <span style="color: #d0d0d0">g,</span> <span style="color: #d0d0d0">b):</span>
+                <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">StabilizedColor(r,</span> <span style="color: #d0d0d0">g,</span> <span style="color: #d0d0d0">b,</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">)</span>
+            <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">StabilizedColor(_,</span> <span style="color: #d0d0d0">_,</span> <span style="color: #d0d0d0">_,</span> <span style="color: #d0d0d0">_):</span>
+                <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">color</span>
+            <span style="color: #d0d0d0">case</span> <span style="color: #d0d0d0">_:</span>
+                <span style="color: #6ab825; font-weight: bold">raise</span> <span style="color: #bbbbbb">TypeError</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&quot;Only supports RGB color&quot;</span><span style="color: #d0d0d0">)</span>
+    
+    <span style="color: #999999; font-style: italic"># match based on a tuple</span>
+    <span style="color: #24909d">print</span><span style="color: #d0d0d0">(stabilize_rgb_color((</span><span style="color: #3677a9">123</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">22</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">22</span><span style="color: #d0d0d0">)))</span>
+    <span style="color: #24909d">print</span><span style="color: #d0d0d0">(stabilize_rgb_color((</span><span style="color: #3677a9">123</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">22</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">31</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">)))</span>
+    
+    <span style="color: #999999; font-style: italic"># match based on a list</span>
+    <span style="color: #24909d">print</span><span style="color: #d0d0d0">(stabilize_rgb_color([</span><span style="color: #3677a9">220</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">225</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">100</span><span style="color: #d0d0d0">]))</span>
+    <span style="color: #24909d">print</span><span style="color: #d0d0d0">(stabilize_rgb_color([</span><span style="color: #3677a9">55</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">75</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">120</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">]))</span>
+    
+    <span style="color: #999999; font-style: italic"># match based on a class</span>
+    <span style="color: #24909d">print</span><span style="color: #d0d0d0">(stabilize_rgb_color(Color(</span><span style="color: #3677a9">255</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">255</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">)))</span>
+    <span style="color: #24909d">print</span><span style="color: #d0d0d0">(stabilize_rgb_color(StabilizedColor(</span><span style="color: #3677a9">100</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">100</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">)))</span>
+    
+    
+    <span style="color: #6ab825; font-weight: bold">from</span> <span style="color: #447fcf; text-decoration: underline">collections</span> <span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #d0d0d0">namedtuple</span>
+    
+    <span style="color: #d0d0d0">BlackAndWhite</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">namedtuple(</span><span style="color: #ed9d13">&#39;BlackAndWhite&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">[</span><span style="color: #ed9d13">&#39;r&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">&#39;g&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">&#39;b&#39;</span><span style="color: #d0d0d0">])</span>
+    <span style="color: #24909d">print</span><span style="color: #d0d0d0">(stabilize_rgb_color(BlackAndWhite(</span><span style="color: #3677a9">255</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">255</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">255</span><span style="color: #d0d0d0">)))</span>
+    </pre></div>
+    
+
+<br>
+
+<p>
+    We can pass heterogeneous data types like lists, tuples, <code>Color</code> class, StabilizedColor class, namedtuple, and every other object that will contain at least three numerical data fields and get a StabilizecColor object in return. What if we try to do the same without <code>match</code> expression and use good ol' if/elif/else? It gets messy:
+</p>
+
+<br>
+
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">stabilize_rgb_color</span><span style="color: #d0d0d0">(color)</span> <span style="color: #d0d0d0">-&gt;</span> <span style="color: #d0d0d0">StabilizedColor:</span>
+    <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">(</span>
+        <span style="color: #24909d">isinstance</span><span style="color: #d0d0d0">(color,</span> <span style="color: #d0d0d0">(</span><span style="color: #24909d">list</span><span style="color: #d0d0d0">,</span> <span style="color: #24909d">tuple</span><span style="color: #d0d0d0">))</span>
+        <span style="color: #6ab825; font-weight: bold">and</span> <span style="color: #24909d">len</span><span style="color: #d0d0d0">(color)</span> <span style="color: #d0d0d0">&gt;=</span> <span style="color: #3677a9">3</span>
+        <span style="color: #6ab825; font-weight: bold">and</span> <span style="color: #24909d">isinstance</span><span style="color: #d0d0d0">(color[</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">],</span> <span style="color: #24909d">int</span><span style="color: #d0d0d0">)</span>
+        <span style="color: #6ab825; font-weight: bold">and</span> <span style="color: #24909d">isinstance</span><span style="color: #d0d0d0">(color[-</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">],</span> <span style="color: #24909d">int</span><span style="color: #d0d0d0">)</span>
+    <span style="color: #d0d0d0">):</span>
+        <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #24909d">len</span><span style="color: #d0d0d0">(color)</span> <span style="color: #d0d0d0">&gt;</span> <span style="color: #3677a9">3</span><span style="color: #d0d0d0">:</span>
+            <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">StabilizedColor(</span>
+                <span style="color: #d0d0d0">color[</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">],</span> <span style="color: #d0d0d0">color[</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">],</span> <span style="color: #d0d0d0">color[</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">],</span> <span style="color: #d0d0d0">color[</span><span style="color: #3677a9">3</span><span style="color: #d0d0d0">]</span>
+            <span style="color: #d0d0d0">)</span>
+        <span style="color: #6ab825; font-weight: bold">else</span><span style="color: #d0d0d0">:</span>
+            <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">StabilizedColor(</span>
+                <span style="color: #d0d0d0">color[</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">],</span> <span style="color: #d0d0d0">color[</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">],</span> <span style="color: #d0d0d0">color[</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">],</span> <span style="color: #3677a9">0</span>
+            <span style="color: #d0d0d0">)</span>
+    <span style="color: #6ab825; font-weight: bold">elif</span> <span style="color: #24909d">isinstance</span><span style="color: #d0d0d0">(color,</span> <span style="color: #d0d0d0">Color):</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">StabilizedColor(</span>
+            <span style="color: #d0d0d0">color.red,</span> <span style="color: #d0d0d0">color.green,</span> <span style="color: #d0d0d0">color.blue,</span> <span style="color: #3677a9">0</span>
+        <span style="color: #d0d0d0">)</span>
+    <span style="color: #6ab825; font-weight: bold">elif</span> <span style="color: #24909d">isinstance</span><span style="color: #d0d0d0">(color,</span> <span style="color: #d0d0d0">StabilizedColor):</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">color</span>
+    <span style="color: #999999; font-style: italic"># Some other elif&#39;s for each Data Type we want to cover</span>
+    <span style="color: #999999; font-style: italic"># elif...</span>
+    <span style="color: #999999; font-style: italic"># elif...</span>
+    <span style="color: #6ab825; font-weight: bold">else</span><span style="color: #d0d0d0">:</span>
+        <span style="color: #6ab825; font-weight: bold">raise</span> <span style="color: #bbbbbb">TypeError</span><span style="color: #d0d0d0">(</span><span style="color: #ed9d13">&quot;Only supports RGB color&quot;</span><span style="color: #d0d0d0">)</span>
+</pre></div>
+
+
+<br>
+<p>
+    There are just too many things we need to evaluate and check before deciding what to do. What if our function goes beyond lists and tuples and expects some custom data classes? we need to add <code>elif</code> statement for each case and the function gets cumbersome fast.
+</p>
+
+<br>
+
+<h3>Summary</h3>
+
+<br>
+
+<p>
+    Match case not only is more readable in many instances, but it can also handle complex situations with grace, and evaluate various patterns. Its syntax is very intuitive, as it borrows many aspects from other languages but maintains pythonic sway. This is a great addition to the language and we should be excited about it.
+</p>

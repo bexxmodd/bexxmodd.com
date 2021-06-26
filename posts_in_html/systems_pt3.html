@@ -1,0 +1,35 @@
+<h1>Inro to Systems Programming with Rust (Part 5)</h1>
+
+<h2>Stream Directions and Job Control</h2>
+
+<br>
+
+<p>
+    in previous parts we built a mini UNIX shell which was able to handle handful amount of System Signals and execute user supplied commands.
+    We'll expand functionality of our shell and add additional features like ability to accept multiple options with the command and redirect input and output streams. In this part 3 we'll learn:
+
+    <br>
+
+    <ul>- How to redirect stdin and stdout streams</ul>
+    <ul>- How to implement stream redirections with Rust</ul>
+    <ul>- What is a processes order and job control</ul>
+    <ul>- How Rust's <code>Option</code> and <code>Result</code> makes our code safer</ul>
+</p>
+
+<br>
+
+<p>
+    If you want to see the the previous version of our mini-shell, you can find it <a href="https://github.com/bexxmodd/systems-with-rust/blob/master/src/main.rs">here</a>. Because in this part we will redo some parts of the program before adding additional functionality to it.
+</p>
+
+<br>
+<p>
+    We will only make signal handler to handle <code>SIGING</code> and <code>SIGQUIT</code> and remove <code>alarm</code> execution completelly as it will be an overhead to this version of shell which will server as an example of how redirection works in UNIX systems.
+</p>
+
+<br>
+
+<p>
+    We'll add a new struct <code>Tokenizer</code> which will take a line of String and break it into a tokens, which will server as commands, options, and directives. Tokenizer will split a string on whitespace and by calling method <code>next()</code> it will remove each part from the string and return to us.
+    Tokenizer will also be able to call <code>peek()</code> which will show what is the next token (if there's any).
+</p>
