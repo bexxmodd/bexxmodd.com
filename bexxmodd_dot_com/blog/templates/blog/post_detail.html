@@ -13,6 +13,11 @@
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
         {% endif %}
+        <small style="text-align:right">
+          {% for tag in post.tags.all %}
+          <a href="{% url 'posts-by-tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+          {% endfor %}
+        </small>
       </div>
       <br>
       <p class="article-content">{{ object.content|safe }}</p>

@@ -4,7 +4,8 @@ from .views import (
     PostDetailView,
     PostCreateView,
     PostUpdateView,
-    PostDeleteView)
+    PostDeleteView
+)
 from . import views
 
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     path('', views.about, name='blog-about'),
     path('resume/', views.resume, name='blog-resume'),
     path('projects/', views.projects, name='blog-projects'),
+    path('/tag/<slug:tag_slug>', views.tagged, name='posts-by-tag')
 ]

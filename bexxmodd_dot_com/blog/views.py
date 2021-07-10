@@ -2,13 +2,16 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView)
-from .models import Post
-from .forms import CommentForm
-
+from django.template.defaultfilters import slugify
+from .models import Post, Comment
+from taggit.models import Tag
+# from .forms import EmailPostForm
 
 def home(request):
+    common_tags = Post.tags.most_common()[:4]
     context = {
-        'posts': Post.objects.all()
+        'posts': Post.objects.all(),
+        'commong_tags': common_tags,
     }
     return render(request, 'blog/posts.html', context)
 
@@ -20,13 +23,18 @@ class PostListView(ListView):
     paginate_by = 5
 
 
+
 class PostDetailView(DetailView):
     model = Post
 
 
+class CommentView(DetailView):
+    model = Comment
+
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'tags']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -35,7 +43,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'tags']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -53,8 +61,15 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self) -> bool:
         post = self.get_object()
         return self.request.user == post.author
-        
 
+def tagged(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    posts = Post.objects.filter(tags=tag)
+    context = {
+        'tag': tag,
+        'posts': posts,
+    }
+    return render(request, 'blog/posts.html', context)
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
@@ -64,3 +79,14 @@ def resume(request):
 
 def projects(request):
     return render(request, 'blog/projects.html', {'title': 'Projects'})
+
+# def post_share(request, post_id):
+#     post = get_object_or_404(Post, id=post_id, status='published')
+#     if request.method == 'POST':
+#         form = EmailPostForm(request.POST)
+#         if form.is_valid():
+#             cd = form.cleaned_data
+#     else:
+#         form = EmailPostForm()
+#     return render(request, 'blog/templates/share.html', {'post': post,
+#                                                         'form': form})
