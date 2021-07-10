@@ -27,11 +27,10 @@
   <br>
 
 <!-- comments -->
-<h3>{{ comments.count }} comments</h3>
-
-{% for comment in comments %}
+<h3>{{ post.comments.count }} comments</h3>
+{% for comment in post.comments.all %}
 <div class="comments" style="padding: 10px;">
-  <p class="font-weight-bold">
+  <p class="font-weight-bold;" style="color:blue; font-weight: bold">
     {{ comment.name }}
     <span class=" text-muted font-weight-normal">
       {{ comment.created_on }}

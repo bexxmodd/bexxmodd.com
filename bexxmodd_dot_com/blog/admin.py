@@ -12,4 +12,4 @@ class CommentAdmin(admin.ModelAdmin):
     actions = ['approve_comments']
 
     def approve_comments(self, request, queryset):
-        queryset.updated(active=True)
+        queryset.update(active=True)
