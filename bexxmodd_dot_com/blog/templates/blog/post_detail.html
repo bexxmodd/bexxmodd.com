@@ -26,11 +26,12 @@
 
   <br>
 
-<!-- comments -->
+<!-- Read comments -->
 <h3>{{ post.comments.count }} comments</h3>
+<a href="{% url 'comment-create' post.pk %}" style="font-weight:bold">Add Comment</a>
 {% for comment in post.comments.all %}
 <div class="comments" style="padding: 10px;">
-  <p class="font-weight-bold;" style="color:blue; font-weight: bold">
+  <p class="font-weight-bold;" style="color:blueviolet; font-weight: bold">
     {{ comment.name }}
     <span class=" text-muted font-weight-normal">
       {{ comment.created_on }}
@@ -41,27 +42,8 @@
 {% endfor %}
 </div>
 </div>
-<div class="card-body">
-{% if new_comment %}
-<div class="alert alert-success" role="alert">
-  Your comment is awaiting moderation
-</div>
-{% else %}
-<textarea id="w3review" name="w3review" rows="4" cols="55" placeholder="Comments section is not working yet..">
-    
-</textarea>
-<form method="post" style="margin-top: 1.3em;">
-  {{ comment_form.as_p }}
-  {% csrf_token %}
-</form>
-<form method="post" style="margin-top: 1.3em;">
-    {{ comment_form | crispy }}
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
-</form>
-{% endif %}
-</div>
-</div>
-</div>
+
+
+<br><br><br>
 
 {% endblock content %}

@@ -21,7 +21,8 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post, related_name='comments', on_delete=models.CASCADE)
     name = models.CharField(max_length=130)
     email = models.EmailField()
     body = models.TextField()
@@ -33,3 +34,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment {self.body} by {self.name}'
+    
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.post.pk})
