@@ -97,8 +97,6 @@ def resume(request):
 def projects(request):
     return render(request, 'blog/projects.html', {'title': 'Projects'})
 
-def acme_challenge(request):
-    return HttpResponse(settings.ACME_CHALLENGE_CONTENT)
 
 # def post_share(request, post_id):
 #     post = get_object_or_404(Post, id=post_id, status='published')
