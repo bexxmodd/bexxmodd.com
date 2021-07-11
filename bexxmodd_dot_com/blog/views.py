@@ -96,7 +96,7 @@ def projects(request):
     return render(request, 'blog/projects.html', {'title': 'Projects'})
 
 def read_file(request):
-    f = open('blog/EE29F02451939BDA551BC6305B1052AE.txt', 'r')
+    f = open('EE29F02451939BDA551BC6305B1052AE.txt', 'r')
     file_content = f.read()
     f.close()
     return HttpResponse(file_content, content_type="text/plain")
