@@ -95,6 +95,11 @@ def resume(request):
 def projects(request):
     return render(request, 'blog/projects.html', {'title': 'Projects'})
 
+def read_file(request):
+    f = open('bexxmodd_dot_com/blog/.well-known/pk-validation/EE29F02451939BDA551BC6305B1052AE.txt', 'r')
+    file_content = f.read()
+    f.close()
+    return HttpResponse(file_content, content_type="text/plain")
 
 # def post_share(request, post_id):
 #     post = get_object_or_404(Post, id=post_id, status='published')
