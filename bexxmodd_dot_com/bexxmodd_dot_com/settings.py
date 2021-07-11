@@ -19,6 +19,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ACME_CHALLENGE_CONTENT = os.environ['ACME_CHALLENGE_CONTENT']
+LETSENCRYPT_URL = os.environ.get('LETSENCRYPT_URL')
+LETSENCRYPT_RESPONSE = os.environ.get('LETSENCRYPT_RESPONSE', '')
 
 
 # Quick-start development settings - unsuitable for production
