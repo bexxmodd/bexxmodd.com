@@ -7,7 +7,6 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView)
 from .models import Post, Comment
 from taggit.models import Tag
-from bexxmodd_dot_com import settings
 # from .forms import EmailPostForm
 
 
