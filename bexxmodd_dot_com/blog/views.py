@@ -1,3 +1,5 @@
+from bexxmodd_dot_com.bexxmodd_dot_com.settings import ACME_CHALLENGE_CONTENT
+from django.http.response import HttpResponse
 from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -5,7 +7,7 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView)
 from .models import Post, Comment
 from taggit.models import Tag
-from django.urls import reverse_lazy
+from bexxmodd_dot_com import settings
 # from .forms import EmailPostForm
 
 
@@ -94,6 +96,9 @@ def resume(request):
 
 def projects(request):
     return render(request, 'blog/projects.html', {'title': 'Projects'})
+
+def acme_challenge(request):
+    return HttpResponse(settings.ACME_CHALLENGE_CONTENT)
 
 # def post_share(request, post_id):
 #     post = get_object_or_404(Post, id=post_id, status='published')
