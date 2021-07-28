@@ -22,5 +22,5 @@ urlpatterns = [
     path('resume/', views.resume, name='blog-resume'),
     path('projects/', views.projects, name='blog-projects'),
     path('tag/<slug:tag_slug>', views.tagged, name='posts-by-tag'),
-    path('.well-known/pki-validation/EE29F02451939BDA551BC6305B1052AE.txt', views.read_file),
+    path('.well-known/acme-validation/Eq9jHYd_PK8mKbDpkGBS41WKfl423F3E1lQ5slZJvNQg', views.read_file),
 ]
