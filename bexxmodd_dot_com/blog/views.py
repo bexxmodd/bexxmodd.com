@@ -96,7 +96,7 @@ def projects(request):
     return render(request, 'blog/projects.html', {'title': 'Projects'})
 
 def read_file(request):
-    f = open('blog/static/docu/q9jHYd_PK8mKbDpkGBS41WKfl423F3E1lQ5slZJvNQg.txt', 'r')
+    f = open('/static/docu/q9jHYd_PK8mKbDpkGBS41WKfl423F3E1lQ5slZJvNQg.txt', 'r')
     file_content = f.read()
     f.close()
     return HttpResponse(file_content, content_type="text/plain")
