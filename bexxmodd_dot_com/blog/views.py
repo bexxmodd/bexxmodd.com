@@ -98,7 +98,7 @@ def projects(request):
 def read_file(request):
     import os
     print(os.getcwd())
-    f = open('/app/bexxmodd_dot_com/blog/static/docu/q9jHYd_PK8mKbDpkGBS41WKfl423F3E1lQ5slZJvNQg.txt', 'r')
+    f = open('/app/bexxmodd_dot_com/blog/static/docu/certbot.txt', 'r')
     file_content = f.read()
     f.close()
     return HttpResponse(file_content, content_type="text/plain")
