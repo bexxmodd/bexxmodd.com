@@ -2,6 +2,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css">
+
 <article class="media content-section">
     <div class="media-body">
       <h2>{{ object.title }}</h2>
@@ -24,14 +27,28 @@
     </div>
   </article>
 
-  <br>
+<br/>
+
+<!-- Applaud button -->
+<center>
+  <section id="clapper">
+    <article>
+        <h2>Enjoy the article?</h2>
+        <p>Give me a clap and post a comment</p>
+    </article>
+    <br/>
+    <applause-button style="width: 55px; height: 55px" color="#f0cc2f"></applause-button>
+</section>
+</center>
+
+<br/><br/>
 
 <!-- Read comments -->
 <h3>{{ post.comments.count }} comments</h3>
 <a href="{% url 'comment-create' post.pk %}" style="font-weight:bold">Add Comment</a>
 {% for comment in post.comments.all %}
 <div class="comments" style="padding: 10px;">
-  <p class="font-weight-bold;" style="color:blueviolet; font-weight: bold">
+  <p class="font-weight-bold;" style="color:#dd3590; font-weight: bold">
     {{ comment.name }}
     <span class=" text-muted font-weight-normal">
       {{ comment.created_on }}
