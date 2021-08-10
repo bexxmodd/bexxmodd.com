@@ -2,9 +2,6 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css">
-
 <article class="media content-section">
     <div class="media-body">
       <h2>{{ object.title }}</h2>
@@ -37,11 +34,11 @@
         <p>Give me a clap and post a comment</p>
     </article>
     <br/>
-    <applause-button style="width: 60px; height: 60px" color="#f0cc2f"></applause-button>
+    <applause-button style="width: 60px; height: 60px" color="#f0cc2f"/>
 </section>
 </center>
 
-<br/><br/>
+<br/>
 
 <!-- Read comments -->
 <h3>{{ post.comments.count }} comments</h3>
