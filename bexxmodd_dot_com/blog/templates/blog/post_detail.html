@@ -45,7 +45,7 @@
 
 <!-- Read comments -->
 <h3>{{ post.comments.count }} comments</h3>
-<a href="{% url 'comment-create' post.pk %}" style="font-weight:bold">Add Comment</a>
+<a href="{% url 'comment-create' post.slug %}" style="font-weight:bold">Add Comment</a>
 {% for comment in post.comments.all %}
 <div class="comments" style="padding: 10px;">
   <p class="font-weight-bold;" style="color:#dd3590; font-weight: bold">
