@@ -10,8 +10,8 @@
         <a class="mr-2" href="#">{{ object.author.get_full_name }}</a>
         <small class="text-muted">{{ object.date_posted|date:"N d, Y" }}</small>
         {% if object.author == user %}
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.slug %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.slug %}">Delete</a>
         {% endif %}
         <small style="text-align:right">
           {% for tag in post.tags.all %}

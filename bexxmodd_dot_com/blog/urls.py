@@ -12,12 +12,12 @@ from . import views
 
 urlpatterns = [
     path('blog/', PostListView.as_view(), name='blog-posts'),
-    path('post/<slug>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/<slug>', PostDetailView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<slug>/comment/',
          CommentCreateView.as_view(), name='comment-create'),
-    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
-    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('post/<slug>/update/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<slug>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('', views.about, name='blog-about'),
     path('resume/', views.resume, name='blog-resume'),
     path('projects/', views.projects, name='blog-projects'),
