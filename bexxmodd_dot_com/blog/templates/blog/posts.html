@@ -28,7 +28,7 @@
               {% endfor %}
             </small>
           </p>
-          <p class="article-content">{{ post.content|truncatechars:600|safe }}<a href="{% url 'post-detail' post.id %}">read more</a></p>
+          <p class="article-content">{{ post.content|truncatechars:600|safe }}<a href="{% url 'post-detail' post.slug %}">read more</a></p>
         </section>
       </article>
     {% endfor %}
