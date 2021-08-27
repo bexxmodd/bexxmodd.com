@@ -2,6 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+const url='https://www.bexxmodd.com/blog/$object.slug'
+
 <article class="media content-section">
     <div class="media-body">
       <h2>{{ object.title }}</h2>
@@ -34,7 +36,7 @@
         <p>Give me a clap and post a comment</p>
     </article>
     <br/>
-    <applause-button style="width: 60px; height: 60px" color="#f0cc2f"/>
+    <applause-button url="{% url 'post-detail' object.slug %}" style="width: 60px; height: 60px" color="#f0cc2f"/>
 </section>
 </center>
 
