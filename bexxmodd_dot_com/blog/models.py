@@ -6,6 +6,7 @@ from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
+    """Blog Post model"""
     title = models.CharField(max_length=150)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
@@ -17,10 +18,12 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'slug': self.slug})
+        return reverse('post-detail', kwargs={'slug': self.slug,
+                                              'pk': self.pk})
 
 
 class Comment(models.Model):
+    """Comment model for posts"""
     post = models.ForeignKey(
         Post, related_name='comments', on_delete=models.CASCADE)
     name = models.CharField(max_length=130)
@@ -34,6 +37,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment {self.body} by {self.name}'
-    
+
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.post.pk})
+        return reverse('post-detail', kwargs={'slug': self.slug,
+                                              'pk': self.post.pk})

@@ -49,6 +49,7 @@ class CommentCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
+        form.instance.slug = self.kwargs['slug']
         return super().form_valid(form)
 
 
@@ -103,13 +104,3 @@ def read_file(request):
     f.close()
     return HttpResponse(file_content, content_type="text/plain")
 
-# def post_share(request, post_id):
-#     post = get_object_or_404(Post, id=post_id, status='published')
-#     if request.method == 'POST':
-#         form = EmailPostForm(request.POST)
-#         if form.is_valid():
-#             cd = form.cleaned_data
-#     else:
-#         form = EmailPostForm()
-#     return render(request, 'blog/templates/share.html', {'post': post,
-#                                                         'form': form})

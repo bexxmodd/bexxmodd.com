@@ -18,7 +18,7 @@
     {% for post in posts %}
     <article class="media content-section">
         <section class="media-body">
-          <h2><a class="article-title" href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h2>
+          <h2><a class="article-title" href="{% url 'post-detail' post.slug post.id %}">{{ post.title }}</a></h2>
           <p class="article-metadata">
             <a class="mr-2" href="#">{{ post.author.get_full_name }}</a>
             <small class="text-muted">{{ post.date_posted|date:"N d, Y" }}</small>
@@ -28,7 +28,7 @@
               {% endfor %}
             </small>
           </p>
-          <p class="article-content">{{ post.content|truncatechars:600|safe }}<a href="{% url 'post-detail' post.slug %}">read more</a></p>
+          <p class="article-content">{{ post.content|truncatechars:600|safe }}<a href="{% url 'post-detail' post.slug post.id %}">read more</a></p>
         </section>
       </article>
     {% endfor %}
