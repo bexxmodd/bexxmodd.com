@@ -16,6 +16,10 @@ h2, h3, h4, h5, h6 {
     font-family: 'Share Tech Mono', monospace;
 }
 
+h2 {
+  font-size: 2.5rem;
+}
+
 body {
     font-family: 'Fira Mono', monospace;
   font-size: 110%;
