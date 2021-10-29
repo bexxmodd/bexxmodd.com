@@ -44,8 +44,6 @@
 <br/>
 
 
-<p> VIEWS: {{ post.current_hit_count }}</p>
-
 <!-- Read comments -->
 <h3>{{ post.comments.count }} comments</h3>
 <a class="add-comment" href="{% url 'comment-create' post.slug post.id %}">Add Comment</a>

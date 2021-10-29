@@ -30,15 +30,14 @@ h2, h3, p {
 
 .stats {
   float: right;
+  color: grey;
   text-align: right;
-  color: #f0cc2f;
   font-weight: bold;
   margin-top: 2em;
-  border-bottom: 2px solid #f0cc2f;
   width: 20em;
 }
 
-.stats .key {
+.key {
   font-size: .8em;
   font-weight: normal;
   text-transform: uppercase;
