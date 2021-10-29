@@ -3,11 +3,10 @@ h1 {
   display: inline-flex;
   font-family: 'Share Tech Mono', monospace;
   background-color: #f0cc2f;
-  padding-left: 20px;
-  padding-right: 20px;
   font-weight: bold;
   font-style: italic;
   border-radius: 10px 40px 20px;
+  margin: 0 auto;
 }
 
 h2, h3, h4, h5, h6 {

@@ -1,0 +1,43 @@
+h1 {
+  margin-bottom: 1em;
+}
+
+h2, h3, p {
+  text-align: left;
+}
+
+.published {
+  font-size: .8em;
+}
+
+.author-name {
+  font-size: 1em;
+}
+
+.article-metadata {
+  margin-bottom: 1.5em;
+}
+
+.text-muted {
+  float: right;
+  margin-left: .5em;
+  text-align: right;
+  font-size: .9em;
+}
+
+.post-tags {
+  display: block;
+  font-size: .9em;
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+.comment-count {
+  text-align: right;
+  color: yellow;
+  font-weight: bold;
+  margin-top: 2em;
+}
+
+div {text-align: center;}
+
