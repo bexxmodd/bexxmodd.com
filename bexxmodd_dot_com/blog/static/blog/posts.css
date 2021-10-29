@@ -33,10 +33,13 @@ h2, h3, p {
 }
 
 .comment-count {
+  float: right;
   text-align: right;
-  color: yellow;
+  color: #f0cc2f;
   font-weight: bold;
   margin-top: 2em;
+  border-bottom: 2px solid yellow;
+  width: 7em;
 }
 
 div {text-align: center;}
