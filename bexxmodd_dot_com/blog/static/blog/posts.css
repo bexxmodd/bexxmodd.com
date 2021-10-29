@@ -14,10 +14,6 @@ h2, h3, p {
   font-size: 1em;
 }
 
-.article-metadata {
-  margin-bottom: 1.5em;
-}
-
 .text-muted {
   float: right;
   margin-left: .5em;
@@ -29,7 +25,7 @@ h2, h3, p {
   display: block;
   font-size: .9em;
   text-align: left;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 .comment-count {
@@ -38,7 +34,7 @@ h2, h3, p {
   color: #f0cc2f;
   font-weight: bold;
   margin-top: 2em;
-  border-bottom: 2px solid yellow;
+  border-bottom: 2px solid #f0cc2f;
   width: 7em;
 }
 

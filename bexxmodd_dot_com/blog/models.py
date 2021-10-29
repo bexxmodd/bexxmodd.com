@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from taggit.managers import TaggableManager
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class Post(models.Model):
@@ -13,6 +14,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, max_length=120)
     tags = TaggableManager()
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_p',
+                         related_query_name='hit_count_generic_relation')
 
     def __str__(self):
         return self.title
@@ -28,7 +31,7 @@ class Comment(models.Model):
         Post, related_name='comments', on_delete=models.CASCADE)
     name = models.CharField(max_length=130)
     email = models.EmailField()
-    body = models.TextField()
+    body = models.TextField(max_length=240)
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
 
