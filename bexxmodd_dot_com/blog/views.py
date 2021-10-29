@@ -6,6 +6,7 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView)
 from .models import Post, Comment
 from taggit.models import Tag
+from hitcount.views import HitCountDetailView
 # from .forms import EmailPostForm
 
 
@@ -26,8 +27,17 @@ class PostListView(ListView):
     paginate_by = 5
 
 
-class PostDetailView(DetailView):
+class PostDetailView(HitCountDetailView):
     model = Post
+    count_hit = True
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        context.update({
+            'popular_posts':
+                Post.objects.order_by('-hit_count_generic__hits')[:3],
+        })
+        return context
 
 
 class CommentView(DetailView):

@@ -28,14 +28,21 @@ h2, h3, p {
   margin-bottom: 2em;
 }
 
-.comment-count {
+.stats {
   float: right;
   text-align: right;
   color: #f0cc2f;
   font-weight: bold;
   margin-top: 2em;
   border-bottom: 2px solid #f0cc2f;
-  width: 7em;
+  width: 20em;
+}
+
+.stats .key {
+  font-size: .8em;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding-left: .5em;
 }
 
 div {text-align: center;}

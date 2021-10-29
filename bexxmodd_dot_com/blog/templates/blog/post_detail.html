@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
+{% load hitcount_tags %}
 {% block content %}
 
 <style>
@@ -42,6 +43,8 @@
 </center>
 <br/>
 
+
+<p> VIEWS: {{ post.current_hit_count }}</p>
 
 <!-- Read comments -->
 <h3>{{ post.comments.count }} comments</h3>

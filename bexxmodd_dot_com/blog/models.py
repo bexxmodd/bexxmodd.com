@@ -2,11 +2,12 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-from taggit.managers import TaggableManager
 from django.contrib.contenttypes.fields import GenericRelation
+from taggit.managers import TaggableManager
+from hitcount.models import HitCountMixin, HitCount
 
 
-class Post(models.Model):
+class Post(models.Model, HitCountMixin):
     """Blog Post model"""
     title = models.CharField(max_length=150)
     content = models.TextField()
@@ -14,7 +15,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, max_length=120)
     tags = TaggableManager()
-    hit_count_generic = GenericRelation(HitCount, object_id_field='object_p',
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
                          related_query_name='hit_count_generic_relation')
 
     def __str__(self):
@@ -23,6 +24,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'slug': self.slug,
                                               'pk': self.pk})
+
+    def current_hit_count(self):
+        return self.hit_count.hits
 
 
 class Comment(models.Model):

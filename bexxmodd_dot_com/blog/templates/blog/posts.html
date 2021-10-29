@@ -24,7 +24,7 @@
             </div>
           </p>
           <p class="article-content">{{ post.content|truncatechars:450|safe }}<a href="{% url 'post-detail' post.slug post.id %}"> Continue reading</a></p>
-          <p class="comment-count">{{ post.comments.count }} Comments</p>
+          <p class="stats"><a class="key">Views: </a>{{ post.current_hit_count }} <a class="key">Comments: </a>{{ post.comments.count }} <a class="key">ThumbsUp: </a>5</p>
         </section>
       </article>
     {% endfor %}
