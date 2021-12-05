@@ -4,7 +4,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
 
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,25 +40,23 @@
         <div class="container">
             <nav class="navbar">
                 <div>
-                <span class="name move-horizontal" onclick="window.location.href='/'">Beka Modebadze</span>
+                <a class="name" href="{% url 'blog-about' %}">Beka Modebadze</a>
                 </div>
                 <hr>
                 <div class="version">Dev's enchiridon</div>
                 <hr>
                 <div class="page-info">
-                    <span class="logs move-horizontal" onclick="window.location.href={% url 'blog-posts' %}">Logs</span>
+                    <a class="logs" href="{% url 'blog-posts' %}">Logs</a>
                     <div class="icon-links">
                         <a href='https://www.github.com/bexxmodd' target="_blank">
-                            <img src="/static/img/GitHub-Mark-Light.png" alt=""></a>
+                            <img src="/static/img/github.png" alt=""></a>
 
                         <a href='https://www.linkedin.com/in/bmodebadze/' target="_blank">
-                            <img src="/static/img/LI-In-Bug.png" alt=""></a>
+                            <img src="/static/img/linkedin-blue.png" alt=""></a>
 
                         <a href='https://twitter.com/bexmod' target="_blank">
-                            <img src="/static/img/twitter-64.png" alt=""></a>
+                            <img src="/static/img/twitter-blue.png" alt=""></a>
 
-                        <a href='mailto: bexx.modd@gmail.com' target="_blank">
-                            <img src="/static/img/email.png" alt=""></a>
                     </div>
                 </div>
             </nav>

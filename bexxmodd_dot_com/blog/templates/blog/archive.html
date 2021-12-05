@@ -12,16 +12,18 @@
 </div>
 
 {% for post in posts %}
-<ul class="list-view">
-    <li>{{ post.date_posted|date:"M d, Y" }} - 
-          <a href="{% url 'post-detail' post.slug post.id %}">{{ post.title }}</a>
-    <!-- <a class="post-tags"> -->
-    -
-    <small>Views: {{ post.current_hit_count }}</small>
-    <!-- {% for tag in post.tags.all %} -->
-    <!-- <a href="{% url 'posts-by-tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a> -->
-    <!-- {% endfor %} -->
-    <!-- </a> -->
-    </li>
-</ul>
+<div class="content-section">
+    <ul class="list-view">
+        <li>{{ post.date_posted|date:"M d, Y" }} »
+            <a href="{% url 'post-detail' post.slug post.id %}">{{ post.title }}</a>
+            <!-- <a class="post-tags"> -->
+            »
+            <small>Views: {{ post.current_hit_count }}</small>
+            <!-- {% for tag in post.tags.all %} -->
+            <!-- <a href="{% url 'posts-by-tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a> -->
+            <!-- {% endfor %} -->
+            <!-- </a> -->
+        </li>
+    </ul>
+</div>
 {% endfor %} {% endblock content %}

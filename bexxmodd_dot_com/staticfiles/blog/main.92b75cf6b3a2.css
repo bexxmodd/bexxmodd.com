@@ -80,6 +80,7 @@ hr {
 }
 
 .icon-links img {
+    width: 1.3rem;
     height: 1.3rem;
     margin-top: .4rem;
     padding-left: .5rem;
@@ -248,7 +249,7 @@ span:hover:before {
     font-family: 'Share Tech Mono', monospace;
     font-size: 1.2rem;
     background: #222831;
-    padding: 1rem 1.5rem 1rem 1.5rem;
+    padding: 1rem 2rem 1rem 2rem;
     border-left: 0.25px solid #30475E;
     border-right: 0.25px solid #30475E;
     border-width: 80%;

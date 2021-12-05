@@ -52,16 +52,15 @@ hr {
     font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: .2rem;
-    padding-left: 1rem;
 }
 
 .version {
-    color: #30475E;
+    color: #DDDDDD;
     float: left;
     text-transform: uppercase;
     font-size: 1.5rem;
     letter-spacing: .2rem;
-    padding-left: 1rem;
+    padding-left: .5rem;
 }
 
 .page-info {
@@ -76,12 +75,12 @@ hr {
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
-    padding-left: 1rem;
 }
 
 .icon-links img {
-    height: 1.3rem;
-    margin-top: .4rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: .35rem;
     padding-left: .5rem;
     float: left;
 }
@@ -98,26 +97,19 @@ hr {
     top: 0
 }
 
-.tabs {
-    float: left;
-}
-
-.name:hover {
-    color:darkcyan;
-    text-decoration: underline;
-}
-
-.logs:hover {
-    color:darkcyan;
-    text-decoration: underline;
-}
 body {
     font-family: 'VT323', monospace;
     background: #222831;
     color: #DDDDDD;
 }
 
+.tabs {
+    float: left;
+}
+
+
 /* hover effect */
+
 .move-left:hover:after {
     left: 0
 }
@@ -179,7 +171,7 @@ span {
 
 .effect-demo {
     margin: 0 auto;
-    color: #F05454;
+    color: #ff0000;
     display: inline;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -204,7 +196,7 @@ span {
 span:focus,
 span:hover {
     outline: 0;
-    color: #F05454;
+    color: #00ffdd;
     -webkit-transition: color 1s ease;
     -moz-transition: color 1s ease;
     -ms-transition: color 1s ease;
@@ -227,7 +219,7 @@ span:focus:before,
 span:hover:after,
 span:hover:before {
     outline: 0;
-    background-color: #F05454;
+    background-color: #00ffdd;
     -webkit-transition: all 1s ease 0s;
     -moz-transition: all 1s ease 0s;
     -ms-transition: all 1s ease 0s;
@@ -248,7 +240,7 @@ span:hover:before {
     font-family: 'Share Tech Mono', monospace;
     font-size: 1.2rem;
     background: #222831;
-    padding: 1rem 1.5rem 1rem 1.5rem;
+    padding: 1rem 2rem 1rem 2rem;
     border-left: 0.25px solid #30475E;
     border-right: 0.25px solid #30475E;
     border-width: 80%;

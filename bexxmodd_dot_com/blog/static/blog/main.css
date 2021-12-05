@@ -1,10 +1,13 @@
 h1 {
+    text-align: center;
     color: #DDDDDD;
     display: inline-flex;
     font-family: 'Share Tech Mono', monospace;
     font-weight: bold;
     font-style: italic;
     margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
 }
 
 h2,
@@ -12,7 +15,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #F05454;
+    color: #0fd;
     font-weight: bold;
     font-family: 'Share Tech Mono', monospace;
 }
@@ -44,20 +47,21 @@ hr {
 }
 
 .name {
-    color: #F05454;
+    color: #0fd;
     font-weight: bold;
     font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: .2rem;
+    padding-left: 1rem;
 }
 
 .version {
-    color: #DDDDDD;
+    color: #30475E;
     float: left;
     text-transform: uppercase;
     font-size: 1.5rem;
     letter-spacing: .2rem;
-    padding-left: .5rem;
+    padding-left: 1rem;
 }
 
 .page-info {
@@ -67,19 +71,19 @@ hr {
 }
 
 .logs {
-    color: #F05454; 
+    color: #0fd;
     margin-right: 2rem;
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
+    padding-left: 1rem;
 }
 
 .icon-links img {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-top: .35rem;
+    height: 1.3rem;
+    margin-top: .4rem;
     padding-left: .5rem;
-    float:left;
+    float: left;
 }
 
 .selection:before,
@@ -87,24 +91,33 @@ hr {
     position: absolute;
     z-index: -1
 }
+
 .selection:after,
 .selection:after {
     content: "";
     top: 0
 }
 
-body {
-    font-family: 'VT323', monospace;
-    background: #222831;
-    color: #faf9d4;
-}
-
 .tabs {
     float: left;
 }
 
-/* hover effect */
+.name:hover {
+    color:darkcyan;
+    text-decoration: underline;
+}
 
+.logs:hover {
+    color:darkcyan;
+    text-decoration: underline;
+}
+body {
+    font-family: 'VT323', monospace;
+    background: #222831;
+    color: #DDDDDD;
+}
+
+/* hover effect */
 .move-left:hover:after {
     left: 0
 }
@@ -166,7 +179,7 @@ span {
 
 .effect-demo {
     margin: 0 auto;
-    color: #ff0000;
+    color: #F05454;
     display: inline;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -191,7 +204,7 @@ span {
 span:focus,
 span:hover {
     outline: 0;
-    color: #00ffdd;
+    color: #F05454;
     -webkit-transition: color 1s ease;
     -moz-transition: color 1s ease;
     -ms-transition: color 1s ease;
@@ -214,13 +227,14 @@ span:focus:before,
 span:hover:after,
 span:hover:before {
     outline: 0;
-    background-color: #00ffdd;
+    background-color: #F05454;
     -webkit-transition: all 1s ease 0s;
     -moz-transition: all 1s ease 0s;
     -ms-transition: all 1s ease 0s;
     -o-transition: all 1s ease 0s;
     transition: all 1s ease 0s
 }
+
 
 /* hover effect end */
 
@@ -232,9 +246,9 @@ span:hover:before {
 
 .content-section {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     background: #222831;
-    padding: 1rem 2rem 1rem 2rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
     border-left: 0.25px solid #30475E;
     border-right: 0.25px solid #30475E;
     border-width: 80%;
@@ -273,7 +287,7 @@ a.article-title:hover {
 }
 
 .article-metadata a:hover {
-    color: #ffffff;
+    color: #DDDDDD;
     text-decoration: none;
 }
 

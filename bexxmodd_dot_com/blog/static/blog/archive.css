@@ -9,20 +9,34 @@ h1 {
 
 .list-view {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 1.25rem;
+    font-size: 1rem;
     display: block;
     text-align: left;
     padding: 0;
     margin: 0;
 }
 
+.content-section {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+ul li {
+    list-style-type: none;
+}
+
 ul a {
     font-size: 1.5rem;
     color: #00ffdd;
     font-weight: bold;
+    text-decoration: none;
 }
 
 ul a:hover {
     color:darkcyan;
     text-decoration: underline;
+}
+
+small {
+    color: #30475E;
 }
