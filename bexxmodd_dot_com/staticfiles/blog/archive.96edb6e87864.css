@@ -1,0 +1,15 @@
+h1 {
+    text-align: center;
+}
+
+.archive-title {
+    text-align: center;
+    padding-bottom: 3rem;
+}
+
+.list-view {
+    display: block;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}

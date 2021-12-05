@@ -1,0 +1,13 @@
+.list-view {
+    display: block;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    border: 3px solid red;
+}
+
+ul {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}

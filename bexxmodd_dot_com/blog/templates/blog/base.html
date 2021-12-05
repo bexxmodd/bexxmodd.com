@@ -1,9 +1,9 @@
 {% load static %}
 
 <!doctype html>
-<html lang="en"xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:fb="http://ogp.me/ns/fb#">
-  <head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+
+<head>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,78 +13,68 @@
     <link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css">
     <script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
     <!-- Font Selection -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coda&family=Inconsolata&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
 
 
-<!-- Preview Image -->
-<meta property="og:image" content="/static/img/bexxmodd.png" />
+    <!-- Preview Image -->
+    <meta property="og:image" content="/static/img/bexxmodd.png" />
 
-<!-- tab icon -->
-<link rel="icon" href="/static/img/icon5.png">
+    <!-- tab icon -->
+    <link rel="icon" href="/static/img/icon5.png">
 
-<style>
-    @import url("/static/blog/main.css")
-</style>
+    <style>
+        @import url("/static/blog/main.css");
+    </style>
 
     {% if title %}
-        <title>Beka Modebadze - {{ title }}</title>
+    <title>Beka Modebadze - {{ title }}</title>
     {% else %}
-        <title>Beka Modebadze</title>
+    <title>Beka Modebadze - Log</title>
     {% endif %}
 </head>
+
 <body>
     <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-          <div class="container">
-            <a class="navbar-brand mr-6" href="{% url 'blog-about' %}" style="color:#00ffdd">Beka Modebadze</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarToggle">
-              <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
-                <a class="nav-item nav-link" href="{% url 'blog-posts' %}">Blog</a>
-                <a class="nav-item nav-link" href="">Videos</a>
-                <a class="nav-item nav-link" href="{% url 'blog-projects' %}">Projects</a>
-                <a class="nav-item nav-link" href="{% url 'blog-resume' %}">Resumé</a>
-              </div>
-              <!-- Navbar Right Side -->
-              <div class="navbar-nav">
-                <a class="nav-item nav-link" href="https://www.github.com/bexxmodd" target="_blank">
-                    <img src="/static/img/GitHub-Mark-Light-64px.png" width="25", height="25", hspace="1"></a>
-                
-                <a class="nav-item nav-link" href="https://www.linkedin.com/in/bmodebadze/" target="_blank">
-                    <img src="/static/img/LI-In-Bug.png" width="25", height="25", hspace="1"></a>
+        <div class="container">
+            <nav class="navbar">
+                <div>
+                <span class="name move-horizontal" onclick="window.location.href='/'">Beka Modebadze</span>
+                </div>
+                <hr>
+                <div class="version">Dev's enchiridon</div>
+                <hr>
+                <div class="page-info">
+                    <span class="logs move-horizontal" onclick="window.location.href={% url 'blog-posts' %}">Logs</span>
+                    <div class="icon-links">
+                        <a href='https://www.github.com/bexxmodd' target="_blank">
+                            <img src="/static/img/GitHub-Mark-Light.png" alt=""></a>
 
-                <a class="nav-item nav-link" href="https://twitter.com/bexmod" target="_blank">
-                    <img src="/static/img/twitter-64.png" width="25", height="25", hspace="1"></a>
+                        <a href='https://www.linkedin.com/in/bmodebadze/' target="_blank">
+                            <img src="/static/img/LI-In-Bug.png" alt=""></a>
 
-                <a class="nav-item nav-link" href="mailto: bexx.modd@gmail.com" target="_blank">
-                    <img src="/static/img/email.png" width="25", height="25", hspace="1"></a>
+                        <a href='https://twitter.com/bexmod' target="_blank">
+                            <img src="/static/img/twitter-64.png" alt=""></a>
 
-              </div>
-            </div>
-          </div>
-        </nav>
-    </header>
-<main role="main" class="container">
-    <div class="row">
-      <div class="col-md-14">
-        {% block content %}{% endblock %}
+                        <a href='mailto: bexx.modd@gmail.com' target="_blank">
+                            <img src="/static/img/email.png" alt=""></a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </div>
-</main>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    </header>
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-14">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+
+</body>
 </font>
+
 </html>

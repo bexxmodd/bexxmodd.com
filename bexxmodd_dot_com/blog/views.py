@@ -16,12 +16,12 @@ def home(request):
         'posts': Post.objects.all(),
         'commong_tags': common_tags,
     }
-    return render(request, 'blog/posts.html', context)
+    return render(request, 'blog/archive.html', context)
 
 
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/posts.html'
+    template_name = 'blog/archive.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 5

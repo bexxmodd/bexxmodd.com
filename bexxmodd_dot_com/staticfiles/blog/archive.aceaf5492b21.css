@@ -1,0 +1,27 @@
+h1 {
+    text-align: center;
+}
+
+.archive-title {
+    text-align: center;
+    padding-bottom: 3rem;
+}
+
+.list-view {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.25rem;
+    display: block;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+ul a {
+    color: #00ffdd;
+    font-weight: bold;
+}
+
+ul a:hover {
+    color:darkcyan;
+    text-decoration: underline;
+}

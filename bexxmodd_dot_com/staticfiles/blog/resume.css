@@ -1,0 +1,12 @@
+h1 {text-align: center;}
+h2 {text-align: left;}
+h5 {text-align: left;}
+p {text-align: left;}
+div {text-align: center;}
+br {
+    display: block;
+    margin: 10px 0;
+ }
+
+ .tab { margin-left: 40px;
+    text-align: left;}
