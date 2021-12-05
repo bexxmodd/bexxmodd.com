@@ -2,18 +2,13 @@ h1 {
     text-align: center;
 }
 
-.archive-title {
-    text-align: center;
-    padding-bottom: 3rem;
-}
-
 .list-view {
     font-family: 'Share Tech Mono', monospace;
     font-size: 1rem;
     display: block;
     text-align: left;
     padding: 0;
-    margin: 0;
+    margin: .5rem 0 .5rem 0;
 }
 
 .content-section {
@@ -33,7 +28,7 @@ ul a {
 }
 
 ul a:hover {
-    color:darkcyan;
+    color: darkcyan;
     text-decoration: underline;
 }
 

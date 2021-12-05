@@ -15,7 +15,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #0fd;
+    color: #F05454;
     font-weight: bold;
     font-family: 'Share Tech Mono', monospace;
 }
@@ -47,7 +47,7 @@ hr {
 }
 
 .name {
-    color: #0fd;
+    color: #F05454;
     font-weight: bold;
     font-size: 2rem;
     text-transform: uppercase;
@@ -71,8 +71,8 @@ hr {
 }
 
 .logs {
-    color: #0fd;
-    margin-right: 2rem;
+    color: #F05454;
+    margin-right: 1rem;
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
@@ -86,157 +86,33 @@ hr {
     float: left;
 }
 
-.selection:before,
-.selection:after {
-    position: absolute;
-    z-index: -1
-}
-
-.selection:after,
-.selection:after {
-    content: "";
-    top: 0
-}
-
 .tabs {
     float: left;
 }
 
 .name:hover {
-    color:darkcyan;
+    color: #b33f3f;
     text-decoration: underline;
+    opacity: .5;
 }
 
 .logs:hover {
-    color:darkcyan;
+    color: #b33f3f;
     text-decoration: underline;
 }
+
 body {
     font-family: 'VT323', monospace;
     background: #222831;
     color: #DDDDDD;
 }
 
-/* hover effect */
-.move-left:hover:after {
-    left: 0
+code {
+    font-family: 'VT323', monospace;
+    font-size: 1.25rem;
+    background-color: #30475E;
+    border-radius: .2rem;
 }
-
-.move-horizontal:after,
-.move-horizontal:focus:after,
-.move-horizontal:focus:before,
-.move-horizontal:hover:after,
-.move-horizontal:hover:before {
-    height: 100%;
-    width: 3px
-}
-
-.move-horizontal:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    right: 50%
-}
-
-.move-horizontal:before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 3px;
-    height: 100%;
-    top: 0;
-    left: 50%
-}
-
-.move-horizontal:hover:after {
-    right: 0
-}
-
-.move-horizontal:hover:before {
-    left: 0
-}
-
-.effect-demo,
-.effect-demo.block {
-    box-sizing: border-box;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none
-}
-
-.effect-demo,
-span {
-    position: relative;
-    z-index: 2;
-    text-decoration: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
-    padding: .2rem .5rem .2rem .5rem;
-    white-space: nowrap;
-    overflow: hidden
-}
-
-.effect-demo {
-    margin: 0 auto;
-    color: #F05454;
-    display: inline;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    user-select: none;
-    transition: color 1s ease
-}
-
-.effect-demo.block,
-.effect-demo:focus,
-.effect-demo:hover {
-    -webkit-transition: color 1s ease;
-    -moz-transition: color 1s ease;
-    -ms-transition: color 1s ease;
-    -o-transition: color 1s ease
-}
-
-.effect-demo:after,
-.effect-demo:before {
-    transition: all 1s ease 0s
-}
-
-span:focus,
-span:hover {
-    outline: 0;
-    color: #F05454;
-    -webkit-transition: color 1s ease;
-    -moz-transition: color 1s ease;
-    -ms-transition: color 1s ease;
-    -o-transition: color 1s ease;
-    transition: color 1s ease;
-    cursor: pointer
-}
-
-span:after,
-span:before {
-    -webkit-transition: all 1s ease 0s;
-    -moz-transition: all 1s ease 0s;
-    -ms-transition: all 1s ease 0s;
-    -o-transition: all 1s ease 0s;
-    transition: all 1s ease 0s
-}
-
-span:focus:after,
-span:focus:before,
-span:hover:after,
-span:hover:before {
-    outline: 0;
-    background-color: #F05454;
-    -webkit-transition: all 1s ease 0s;
-    -moz-transition: all 1s ease 0s;
-    -ms-transition: all 1s ease 0s;
-    -o-transition: all 1s ease 0s;
-    transition: all 1s ease 0s
-}
-
-
-/* hover effect end */
 
 .container {
     max-width: 768px;
@@ -249,25 +125,23 @@ span:hover:before {
     font-size: 1.2rem;
     background: #222831;
     padding: 1rem 1.5rem 1rem 1.5rem;
-    border-left: 0.25px solid #30475E;
-    border-right: 0.25px solid #30475E;
+    border: 0.25px solid #30475E;
     border-width: 80%;
 }
 
-.content-section a {
-    color: #F05454;
+.link {
+    color: #00ffdd;
 }
 
 .article-title {
-    color: #00ffdd;
+    color: #F05454;
     font-weight: bold;
 }
 
 a.article-title:hover {
     display: inline-flex;
-    color: #490c41;
-    background-color: #f0cc2f;
-    border-radius: 5px 25px 25px;
+    color: #b33f3f;
+    text-decoration: underline;
     opacity: .5;
 }
 
@@ -295,4 +169,9 @@ a.article-title:hover {
     width: 25px;
     height: 25px;
     vertical-align: middle;
+}
+
+.page-title {
+    text-align: center;
+    padding-bottom: 3rem;
 }

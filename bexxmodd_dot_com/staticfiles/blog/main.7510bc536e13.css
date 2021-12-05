@@ -72,7 +72,7 @@ hr {
 
 .logs {
     color: #F05454;
-    margin-right: 1rem;
+    margin-right: 2rem;
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
@@ -91,13 +91,12 @@ hr {
 }
 
 .name:hover {
-    color: #b33f3f;
+    color:#b33f3f;
     text-decoration: underline;
-    opacity: .5;
 }
 
 .logs:hover {
-    color: #b33f3f;
+    color:#b33f3f;
     text-decoration: underline;
 }
 
@@ -125,11 +124,12 @@ code {
     font-size: 1.2rem;
     background: #222831;
     padding: 1rem 1.5rem 1rem 1.5rem;
-    border: 0.25px solid #30475E;
+    border-left: 0.25px solid #30475E;
+    border-right: 0.25px solid #30475E;
     border-width: 80%;
 }
 
-.link {
+.content-section a:link {
     color: #00ffdd;
 }
 
@@ -140,8 +140,9 @@ code {
 
 a.article-title:hover {
     display: inline-flex;
-    color: #b33f3f;
-    text-decoration: underline;
+    color: #490c41;
+    background-color: #f0cc2f;
+    border-radius: 5px 25px 25px;
     opacity: .5;
 }
 
@@ -169,9 +170,4 @@ a.article-title:hover {
     width: 25px;
     height: 25px;
     vertical-align: middle;
-}
-
-.page-title {
-    text-align: center;
-    padding-bottom: 3rem;
 }

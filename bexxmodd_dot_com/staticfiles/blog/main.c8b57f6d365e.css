@@ -72,7 +72,7 @@ hr {
 
 .logs {
     color: #F05454;
-    margin-right: 1rem;
+    margin-right: 2rem;
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
@@ -123,9 +123,10 @@ code {
 .content-section {
     font-family: 'Share Tech Mono', monospace;
     font-size: 1.2rem;
-    background: #222831;
+    background: #30475E;
     padding: 1rem 1.5rem 1rem 1.5rem;
-    border: 0.25px solid #30475E;
+    border-left: 0.25px solid #30475E;
+    border-right: 0.25px solid #30475E;
     border-width: 80%;
 }
 
