@@ -4,7 +4,7 @@ h1 {
 
 .list-view {
     font-family: 'VT323', monospace;
-    font-size: 1.5rem;
+    font-size: 1rem;
     display: block;
     text-align: left;
     padding: 0;
@@ -28,11 +28,10 @@ ul a {
 }
 
 ul a:hover {
+    color: darkcyan;
     text-decoration: underline;
-    opacity: .5;
 }
 
 small {
-    font-size: 1.3rem;
     color: #30475E;
 }

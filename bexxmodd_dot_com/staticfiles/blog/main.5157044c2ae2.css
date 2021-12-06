@@ -72,7 +72,7 @@ hr {
 
 .logs {
     color: #F05454;
-    margin-right: .5rem;
+    margin-right: 1rem;
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
@@ -80,14 +80,14 @@ hr {
 }
 
 .icon-links img {
-    height: 1rem;
-    margin-top: .4rem;
+    height: 1.1rem;
+    margin-top: .3rem;
     padding-left: .4rem;
     float: left;
 }
 
 .icon-links img:hover {
-    opacity: .5;
+    background-color: #b33f3f;
 }
 
 .tabs {
@@ -95,13 +95,14 @@ hr {
 }
 
 .name:hover {
+    color: #b33f3f;
     text-decoration: underline;
     opacity: .5;
 }
 
 .logs:hover {
+    color: #b33f3f;
     text-decoration: underline;
-    opacity: .5;
 }
 
 body {
@@ -143,6 +144,7 @@ code {
 
 a.article-title:hover {
     display: inline-flex;
+    color: #b33f3f;
     text-decoration: underline;
     opacity: .5;
 }

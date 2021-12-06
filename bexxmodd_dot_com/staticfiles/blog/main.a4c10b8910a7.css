@@ -5,7 +5,6 @@ h1 {
     font-family: 'Share Tech Mono', monospace;
     font-weight: bold;
     font-style: italic;
-    font-size: 2rem;
     margin: 0 auto;
     text-transform: uppercase;
     letter-spacing: .1rem;
@@ -22,8 +21,8 @@ h6 {
 }
 
 .navbar {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
     position: sticky;
     top: 0;
     display: flex;
@@ -67,12 +66,12 @@ hr {
 .page-info {
     width: 100%;
     font-size: 1.5rem;
-    padding-top: 2rem;
+    padding-top: 3rem;
 }
 
 .logs {
     color: #F05454;
-    margin-right: .5rem;
+    margin-right: 1rem;
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
@@ -80,14 +79,10 @@ hr {
 }
 
 .icon-links img {
-    height: 1rem;
+    height: 1.3rem;
     margin-top: .4rem;
-    padding-left: .4rem;
+    padding-left: .5rem;
     float: left;
-}
-
-.icon-links img:hover {
-    opacity: .5;
 }
 
 .tabs {
@@ -95,13 +90,14 @@ hr {
 }
 
 .name:hover {
+    color: #b33f3f;
     text-decoration: underline;
     opacity: .5;
 }
 
 .logs:hover {
+    color: #b33f3f;
     text-decoration: underline;
-    opacity: .5;
 }
 
 body {
@@ -112,7 +108,7 @@ body {
 
 code {
     font-family: 'VT323', monospace;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     background-color: #30475E;
     border-radius: .2rem;
 }
@@ -125,7 +121,7 @@ code {
 
 .content-section {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 1rem;
+    font-size: 1.2rem;
     background: #222831;
     padding: 1rem 1.5rem 1rem 1.5rem;
     border: 0.25px solid #30475E;
@@ -143,6 +139,7 @@ code {
 
 a.article-title:hover {
     display: inline-flex;
+    color: #b33f3f;
     text-decoration: underline;
     opacity: .5;
 }

@@ -14,7 +14,7 @@
 <div class="content-section">
     {% for post in posts %}
     <ul class="list-view">
-        <li>{{ post.date_posted|date:"M d, Y" }} »
+        <li>{{ post.date_posted|date:"M d, Y" }} «
             <a class="article-title" href="{% url 'post-detail' post.slug post.id %}">{{ post.title }}</a>
             <!-- <a class="post-tags"> -->
             »

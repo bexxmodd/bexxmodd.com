@@ -28,8 +28,8 @@ ul a {
 }
 
 ul a:hover {
+    color: darkcyan;
     text-decoration: underline;
-    opacity: .5;
 }
 
 small {
