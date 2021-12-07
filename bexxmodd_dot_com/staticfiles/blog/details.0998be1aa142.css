@@ -3,22 +3,33 @@ h2:first-child {
     color: #dddddd;
 }
 
+.author-name {
+    font-size: 1em;
+}
+
 .text-muted {
-    font-family: 'VT323', monospace;
-    text-align: left;
+    font-family: 'VT323' monospace;
+    float: right;
+    margin-left: .5em;
+    text-align: right;
     color: #30475E;
     font-size: 1.3rem;
 }
 
 .post-tags {
     display: block;
-    font-size: 1.3rem;
+    font-size: 1rem;
     text-align: left;
+    margin-bottom: 1em;
 }
 
 .published {
     font-size: 1rem;
 }
+
+/* article {
+    margin-top: 1em;
+} */
 
 .add-comment {
     font-size: 1.5em;

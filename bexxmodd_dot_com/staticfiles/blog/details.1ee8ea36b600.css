@@ -1,0 +1,53 @@
+h2:first-child {
+  font-size: 2rem;
+  color: #dddddd;
+}
+
+.author-name {
+  font-size: 1em;
+}
+
+.text-muted {
+  float: right;
+  margin-left: .5em;
+  text-align: right;
+  font-size: .9em;
+}
+
+.post-tags {
+  display: block;
+  font-size: .9em;
+  text-align: left;
+  margin-bottom: 2em;
+}
+
+.published {
+  font-size: .8em;
+}
+
+article {
+  margin-top: 2em;
+}
+.add-comment {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.comments {
+  padding: .5em;
+}
+
+.text-muted {
+  float:right;
+}
+
+.reactions {
+  height: 2em;
+  color: #f0cc2f;
+}
+
+.comment-author {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #dd3590;
+}

@@ -3,22 +3,31 @@ h2:first-child {
     color: #dddddd;
 }
 
+.author-name {
+    font-size: 1em;
+}
+
 .text-muted {
-    font-family: 'VT323', monospace;
-    text-align: left;
-    color: #30475E;
-    font-size: 1.3rem;
+    float: right;
+    margin-left: .5em;
+    text-align: right;
+    font-size: 1rem;
 }
 
 .post-tags {
     display: block;
-    font-size: 1.3rem;
+    font-size: 1rem;
     text-align: left;
+    margin-bottom: 1em;
 }
 
 .published {
     font-size: 1rem;
 }
+
+/* article {
+    margin-top: 1em;
+} */
 
 .add-comment {
     font-size: 1.5em;
@@ -27,6 +36,10 @@ h2:first-child {
 
 .comments {
     padding: .5em;
+}
+
+.text-muted {
+    float: right;
 }
 
 .reactions {
