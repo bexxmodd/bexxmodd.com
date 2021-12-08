@@ -9,6 +9,7 @@ h1 {
     text-align: left;
     padding: 0;
     margin: .5rem 0 .5rem 0;
+    color: #30475E;
 }
 
 .content-section {
@@ -20,17 +21,16 @@ ul li {
     list-style-type: none;
 }
 
-ul a {
+/* ul a {
     font-size: 1.7rem;
     color: #00ffdd;
-    font-weight: bold;
     text-decoration: none;
-}
+} */
 
-ul a:hover {
+/* ul a:hover {
     text-decoration: underline;
     opacity: .5;
-}
+} */
 
 small {
     font-size: 1.3rem;

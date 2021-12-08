@@ -137,8 +137,7 @@ code {
 
 .article-title {
     color: #F05454;
-    text-decoration: none;
-    letter-spacing: .1rem;
+    letter-spacing: .2rem;
 }
 
 a.article-title:hover {

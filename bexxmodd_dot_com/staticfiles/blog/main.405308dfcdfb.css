@@ -89,6 +89,13 @@ hr {
     opacity: .5;
 }
 
+.text-muted {
+    font-family: 'VT323', monospace;
+    text-align: left;
+    color: #30475E;
+    font-size: 1.5rem;
+}
+
 .tabs {
     float: left;
 }

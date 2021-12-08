@@ -48,6 +48,7 @@ hr {
 
 .name {
     color: #F05454;
+    /* font-weight: bold; */
     font-size: 1.7rem;
     text-transform: uppercase;
     letter-spacing: .2rem;
@@ -137,7 +138,7 @@ code {
 
 .article-title {
     color: #F05454;
-    text-decoration: none;
+    font-weight: bold;
     letter-spacing: .1rem;
 }
 
