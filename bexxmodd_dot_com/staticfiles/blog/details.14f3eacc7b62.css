@@ -1,0 +1,41 @@
+title {
+    font-size: 2rem;
+    color: #dddddd;
+}
+
+.text-muted {
+    font-family: 'VT323', monospace;
+    text-align: left;
+    color: #30475E;
+    font-size: 1.3rem;
+}
+
+.post-tags {
+    display: block;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+.published {
+    font-size: 1rem;
+}
+
+.add-comment {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.comments {
+    padding: .5em;
+}
+
+.reactions {
+    height: 2em;
+    color: #f0cc2f;
+}
+
+.comment-author {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #0fd;
+}

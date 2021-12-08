@@ -36,8 +36,7 @@
 
 .tag-style:hover {
     color: #ddd;
-    opacity: .5;
-    cursor: pointer;
+    background-color: #117a8b;
 }
 
 .published {

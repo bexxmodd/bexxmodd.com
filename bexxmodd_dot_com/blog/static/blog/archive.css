@@ -12,8 +12,8 @@ h1 {
 }
 
 .content-section {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 ul li {

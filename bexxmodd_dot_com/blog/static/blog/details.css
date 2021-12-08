@@ -1,6 +1,8 @@
-h2:first-child {
+.title {
     font-size: 2rem;
     color: #dddddd;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
 }
 
 .text-muted {
@@ -14,6 +16,28 @@ h2:first-child {
     display: block;
     font-size: 1.3rem;
     text-align: left;
+}
+
+.tag-style {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #ddd;
+    /* background-color: #17a2b8; */
+    background-color: #F05454;
+}
+
+.tag-style:hover {
+    color: #ddd;
+    opacity: .5;
+    cursor: pointer;
 }
 
 .published {

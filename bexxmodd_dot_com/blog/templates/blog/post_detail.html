@@ -8,14 +8,12 @@
 <article class="media content-section">
     <div class="media-body">
         <div class="article-metadata">
-            <h2>{{ object.title }}</h2>
             <div class="text-muted">{{ object.date_posted|date:"N d, Y" }}</div>
-            
+            <div class="title">{{ object.title }}</div>
+
             {% for tag in post.tags.all %}
             <div href="{% url 'posts-by-tag' tag.slug %}" class="tag-style">#{{ tag }}</div>
-            {% endfor %}
-            
-            {% if object.author == user %}
+            {% endfor %} {% if object.author == user %}
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.slug object.id %}">Update</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.slug object.id %}">Delete</a> {% endif %}
             <div class="post-tags">
