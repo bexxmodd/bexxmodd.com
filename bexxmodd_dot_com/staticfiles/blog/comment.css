@@ -1,0 +1,12 @@
+.add-comment {
+    font-size: 1.5rem;
+    border: 3px solid red;
+}
+
+button {
+    background-color: yellow;
+}
+
+.form-group {
+    background-color: green;
+}

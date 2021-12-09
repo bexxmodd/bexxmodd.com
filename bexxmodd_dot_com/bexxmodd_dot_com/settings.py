@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zgf0+@&s2*@#cz#5c16^^8-by1g1%59*e&132u4vaxu#17w888'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True 
 
 ALLOWED_HOSTS = ['bexxmodd.herokuapp.com', '127.0.0.1', 'localhost']
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'hitcount',
-    'taggit'
+    'taggit',
 ]
 
 TAGGIT_CASE_INSENSITIVE = False
@@ -71,6 +71,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'custom_tags': 'blog.templatetags.custom_tags',
+            }
         },
     },
 ]

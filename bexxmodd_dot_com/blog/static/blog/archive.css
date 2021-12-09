@@ -2,6 +2,15 @@ h1 {
     text-align: center;
 }
 
+.post-date {
+    font-family: 'VT323', monospace;
+    color: #30475E;
+    font-size: 1.3rem;
+    float: left;
+    text-transform: uppercase;
+    padding-right: 1rem;
+}
+
 .list-view {
     font-family: 'VT323', monospace;
     font-size: 1.5rem;
@@ -21,18 +30,35 @@ ul li {
     list-style-type: none;
 }
 
-/* ul a {
-    font-size: 1.7rem;
-    color: #00ffdd;
-    text-decoration: none;
-} */
-
-/* ul a:hover {
-    text-decoration: underline;
-    opacity: .5;
-} */
-
 small {
     font-size: 1.3rem;
     color: #30475E;
+}
+
+.tag-style {
+    display: inline-block;
+    padding: .2rem .3rem;
+    font-size: 90%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #ddd;
+    background-color: #F05454;
+    text-decoration: none;
+}
+
+.tag-style:hover {
+    color: #ddd;
+    opacity: .5;
+    cursor: pointer;
+}
+
+.tag-slug {
+    padding-top: 1rem;
+    display: block;
+    text-align: center;
 }

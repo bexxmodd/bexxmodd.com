@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %} {% block content %}
+<style>
+    @import url("/static/blog/oss.css");
+</style>
+
+<div class="page-title">
+    <h1>Open-Source Software</h1>
+</div>
+
+<div class="content-section">
+    <ul class="list-view">
+
+        <li>
+            <a href="https://github.com/bexxmodd/vizex" target="_blank"><h3>vizex</h3></a>
+            <a>
+            {% load custom_tags %}
+            {% project_stars "https://api.github.com/repos/bexxmodd/vizex" %}
+            </a>
+            <a>
+            {% load custom_tags %}
+            {% project_forks "https://api.github.com/repos/bexxmodd/vizex" %}
+            </a>
+                    vizex is the terminal program written in Python for the UNIX/Linux systems which helps the user to visualize the disk space usage for every partition and media on the user's machine. vizex is highly customizable and can fit
+                    any user's taste and preferences.
+            </a>
+        </li>
+<li>
+
+</li>
+        <li>
+            <a href="https://github.com/bexxmodd/paleatra" target="_blank"><h3>Paleatra</h3></a>
+                A program that produces the copy of the image supplied with a thin frame and a palette made of the 10 most frequent colors. Program is written in Rust 2018.
+        </li>
+
+        <li>
+            <a href="https://github.com/bexxmodd/cr4sh_" target="_blank"><h3>cr4sh_</h3></a>
+            cr4sh_ is a UNIX mini-shell implemented with Rust. This shell can be great for educational purposes. You can learn about Linux system, processes, stdio, signals and much more.
+        </li>
+    </ul>
+</div>
+
+{% endblock content %}

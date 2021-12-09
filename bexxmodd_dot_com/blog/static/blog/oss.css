@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+}
+
+h3 {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    letter-spacing: .2rem;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+ul li {
+    list-style-type: none;
+    padding-bottom: 2rem;
+}
+
+li a {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    display: block;
+    text-align: left;
+    padding: 0;
+    margin: .5rem 0 .5rem 0;
+    color: #30475E;
+    text-decoration: none;
+}

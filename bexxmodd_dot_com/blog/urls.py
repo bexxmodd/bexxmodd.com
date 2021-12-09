@@ -20,7 +20,7 @@ urlpatterns = [
     path('post/<slug:slug>/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('', views.about, name='blog-about'),
     path('resume/', views.resume, name='blog-resume'),
-    path('projects/', views.projects, name='blog-projects'),
+    path('oss/', views.oss, name='blog-oss'),
     path('tag/<slug:tag_slug>', views.tagged, name='posts-by-tag'),
     path('.well-known/acme-challenge/5wcpKi1Z9hJFFZ3toG9sE6-2M-Dj9WTD6CMQS5IcPK0', views.read_file),
 ]

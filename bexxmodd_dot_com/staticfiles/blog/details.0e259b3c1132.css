@@ -1,0 +1,77 @@
+.title {
+    font-size: 2rem;
+    color: #dddddd;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.post-date {
+    font-family: 'VT323', monospace;
+    color: #30475E;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+}
+
+.tag-style {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #ddd;
+    /* background-color: #17a2b8; */
+    background-color: #F05454;
+}
+
+.final-words {
+    text-align: center;
+}
+
+.final-words h2 {
+    font-family: 'VT323', monospace;
+    color: #dddddd;
+}
+
+.tag-style:hover {
+    color: #ddd;
+    opacity: .5;
+    cursor: pointer;
+}
+
+.published {
+    font-size: 1rem;
+}
+
+.add-comment {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.comments {
+    padding-left: .5rem;
+    padding-bottom: 1rem;;
+    font-size: 1.3rem;
+}
+
+.comment-content {
+    margin: 0;
+}
+
+.reactions {
+    height: 2em;
+    color: #f0cc2f;
+}
+
+.comment-author {
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: .1rem;
+    color: #dddddd;
+    padding-margin: -1rem;
+}

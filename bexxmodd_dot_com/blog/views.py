@@ -1,3 +1,6 @@
+import json
+import requests
+
 from django.http.response import HttpResponse
 from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404
@@ -7,7 +10,6 @@ from django.views.generic import (
 from .models import Post, Comment
 from taggit.models import Tag
 from hitcount.views import HitCountDetailView
-# from .forms import EmailPostForm
 
 
 def home(request):
@@ -92,7 +94,7 @@ def tagged(request, tag_slug):
         'tag': tag,
         'posts': posts,
     }
-    return render(request, 'blog/posts.html', context)
+    return render(request, 'blog/archive.html', context)
 
 
 def about(request):
@@ -102,9 +104,12 @@ def about(request):
 def resume(request):
     return render(request, 'blog/resume.html', {'title': 'Resume'})
 
+def blog_like(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get("post_id"))
+    post.claps.add(request)
 
-def projects(request):
-    return render(request, 'blog/projects.html', {'title': 'Projects'})
+def oss(request):
+    return render(request, 'blog/OSS.html', {'title': 'OSS'})
 
 def read_file(request):
     import os
@@ -113,3 +118,17 @@ def read_file(request):
     file_content = f.read()
     f.close()
     return HttpResponse(file_content, content_type="text/plain")
+
+
+
+def get_project_forks(url: str) -> str:
+    return json.loads(requests.get(url).text)['forks']
+
+from django import template
+from django.template.defaultfilters import stringfilter
+
+register = template.Library()
+
+@register.simple_tag
+def get_project_stars(url: str) -> str:
+    return json.loads(requests.get(url).text)['stargazers_count']

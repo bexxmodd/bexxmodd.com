@@ -15,8 +15,9 @@ class Post(models.Model, HitCountMixin):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, max_length=120)
     tags = TaggableManager()
-    likes = models.IntegerField()
-
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
+                         related_query_name='hit_count_generic_relation')
+    
     def __str__(self):
         return self.title
 

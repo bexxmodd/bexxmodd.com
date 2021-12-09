@@ -54,7 +54,7 @@ hr {
     padding-left: 1rem;
 }
 
-.version {
+.dissolved {
     color: #30475E;
     font-size: 1.3rem;
     float: left;
@@ -71,11 +71,14 @@ hr {
 
 .logs {
     color: #F05454;
-    margin-right: .5rem;
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
     padding-left: 1rem;
+}
+
+.logs:nth-child(2) {
+    margin-right: .5rem;
 }
 
 .icon-links img {

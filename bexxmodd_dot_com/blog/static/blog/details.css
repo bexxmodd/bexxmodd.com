@@ -5,11 +5,11 @@
     padding-bottom: .5rem;
 }
 
-.text-muted {
+.post-date {
     font-family: 'VT323', monospace;
-    text-align: left;
     color: #30475E;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    text-transform: uppercase;
 }
 
 .tag-style {
@@ -24,8 +24,8 @@
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     color: #ddd;
-    /* background-color: #17a2b8; */
     background-color: #F05454;
+    text-decoration: none;
 }
 
 .tag-style:hover {
@@ -34,17 +34,60 @@
     cursor: pointer;
 }
 
+.final-words {
+    text-align: center;
+}
+
+applause-button {
+    width: 40px;
+    height: 40px;
+}
+
+.final-words h2 {
+    font-family: 'VT323', monospace;
+    color: #dddddd;
+}
+
 .published {
     font-size: 1rem;
 }
 
 .add-comment {
+    font-family: 'VT323', monospace;
+    background-color: #F05454;
+    cursor: pointer;
+    padding: .5rem 1rem .5rem 1rem;
+    display: inline-block;
+    text-transform: uppercase;
+    margin-left: 1rem;
+    letter-spacing: .1rem;
+    font-weight: 700;
+    outline: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    color: #fff;
+    display: inline-block;
     font-size: 1.5em;
     font-weight: bold;
+    letter-spacing: .2rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+}
+
+.add-comment:hover {
+    opacity: .5;
 }
 
 .comments {
-    padding: .5em;
+    padding-left: .5rem;
+    padding-bottom: 1rem;;
+    font-size: 1.3rem;
+}
+
+.comment-content {
+    display: block;
+    /* margin: -1rem; */
 }
 
 .reactions {
@@ -55,5 +98,6 @@
 .comment-author {
     font-size: 1.3em;
     font-weight: bold;
-    color: #0fd;
+    letter-spacing: .1rem;
+    color: #dddddd;
 }

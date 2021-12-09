@@ -1,0 +1,46 @@
+h1 {
+    text-align: center;
+}
+
+.date {
+    color: #30475E;
+    font-size: 1.3rem;
+    float: left;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+}
+
+.list-view {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    display: block;
+    text-align: left;
+    padding: 0;
+    margin: .5rem 0 .5rem 0;
+    color: #30475E;
+}
+
+.content-section {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+/* ul a {
+    font-size: 1.7rem;
+    color: #00ffdd;
+    text-decoration: none;
+} */
+
+/* ul a:hover {
+    text-decoration: underline;
+    opacity: .5;
+} */
+
+small {
+    font-size: 1.3rem;
+    color: #30475E;
+}

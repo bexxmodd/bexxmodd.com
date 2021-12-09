@@ -14,12 +14,22 @@
 <div class="content-section">
     {% for post in posts %}
     <ul class="list-view">
-        <li>{{ post.date_posted|date:"M d, Y" }} «
-            <a class="article-title" href="{% url 'post-detail' post.slug post.id %}">{{ post.title }}</a>
-            <!-- <a class="post-tags"> -->
-            »
-            <small>Views: {{ post.current_hit_count }}</small>
+        <li><a class="post-date">{{ post.date_posted|date:"M d, Y" }}</a>
+            <a class="article-title" href="{% url 'post-detail' post.slug post.id %}">
+                {{ post.title }}
+            </a>            
+            <small>Views: {{ post.current_hit_count }}</small>,
+            <small>Comments: {{ post.comments.count }}</small>
         </li>
     </ul>
-    {% endfor %} {% endblock content %}
+    {% endfor %}
 </div>
+
+<div class ="tag-slug">
+    <h3>Filter Logs Based on a Tag</h3>
+        <a href="{% url 'posts-by-tag' 'rust' %}" class="tag-style">#Rust</a>
+        <a href="{% url 'posts-by-tag' 'linux' %}" class="tag-style">#Linux</a>
+        <a href="{% url 'posts-by-tag' 'softwareengineering' %}" class="tag-style">#SoftwareEngineering</a>
+        <a href="{% url 'posts-by-tag' 'systems' %}" class="tag-style">#Systems</a>
+</div>
+{% endblock content %}

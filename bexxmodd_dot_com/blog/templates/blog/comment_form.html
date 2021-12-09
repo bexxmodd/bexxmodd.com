@@ -1,15 +1,21 @@
 {% extends "blog/base.html" %}
+
+
 {% load crispy_forms_tags %}
 {% block content %}
+<style>
+    @import url("/static/blog/comment.css");
+</style>
+
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Comment</legend>
+            <fieldset>
+                <legend class="add-comment">Add Comment</legend>
                 {{ form|crispy }}
             </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
+            <div>
+                <button class="post-button" type="submit">Post</button>
             </div>
         </form>
     </div>

@@ -1,0 +1,35 @@
+fieldset {
+    border: none;
+}
+
+.add-comment {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.post-button {
+    border: none;
+    font-family: 'VT323', monospace;
+    font-size: inherit;
+    background-color: #F05454;
+    cursor: pointer;
+    padding: .5rem 1rem .5rem 1rem;
+    display: inline-block;
+    text-transform: uppercase;
+    margin-left: 1rem;
+    letter-spacing: .1rem;
+    font-weight: 700;
+    outline: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    color: #fff;
+}
+
+.post-button:hover {
+    opacity: .5;
+}
+
+.form-group {
+    line-height: 2;
+}
