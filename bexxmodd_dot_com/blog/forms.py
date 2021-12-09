@@ -22,6 +22,11 @@ class CommentForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs) # Call to ModelForm constructor
+        self.fields['body'].widget.attrs['cols'] = 30
+        self.fields['body'].widget.attrs['row'] = 80
+
 
 # class EmailPostForm(forms.Form):
 #     name = forms.CharField(max_lengh=25)

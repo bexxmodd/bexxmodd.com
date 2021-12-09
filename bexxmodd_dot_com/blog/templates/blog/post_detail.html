@@ -37,7 +37,7 @@
 
 
 <!-- Read comments -->
-<div class="add-comment" href="{% url 'comment-create' post.slug post.id %}">Add Comment</div>
+<a class="add-comment" href="{% url 'comment-create' post.slug post.id %}">Add Comment</a>
 {% for comment in post.comments.all %}
     <div class="comments">
         <a class="comment-author">

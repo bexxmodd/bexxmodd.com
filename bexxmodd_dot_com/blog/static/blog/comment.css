@@ -1,5 +1,6 @@
 fieldset {
     border: none;
+    width: 100%;
 }
 
 .add-comment {
@@ -32,4 +33,9 @@ fieldset {
 
 .form-group {
     line-height: 2;
+}
+
+#id_body {
+    width: 90%;
+    height: 20rem;
 }

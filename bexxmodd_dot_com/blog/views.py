@@ -121,14 +121,3 @@ def read_file(request):
 
 
 
-def get_project_forks(url: str) -> str:
-    return json.loads(requests.get(url).text)['forks']
-
-from django import template
-from django.template.defaultfilters import stringfilter
-
-register = template.Library()
-
-@register.simple_tag
-def get_project_stars(url: str) -> str:
-    return json.loads(requests.get(url).text)['stargazers_count']

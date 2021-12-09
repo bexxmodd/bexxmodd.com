@@ -1,0 +1,48 @@
+h1 {
+    text-align: center;
+}
+
+h3 {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    letter-spacing: .2rem;
+    text-transform: uppercase;
+    font-weight: normal;
+    border: 2px solid yellow;
+    display: ;
+}
+
+ul li {
+    list-style-type: none;
+    padding-bottom: 2rem;
+}
+
+li a {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    display: flex;
+    text-align: left;
+    padding: 0;
+    margin: .5rem 0 .5rem 0;
+    color: #30475E;
+    text-decoration: none;
+}
+
+li p {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    color: #dddddd;
+}
+
+.github-stats {
+    display: inline;
+    font-size: 1rem;
+    padding-right: 1rem;
+}
+
+.github-stats img {
+    height: 1rem;
+}
