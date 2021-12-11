@@ -17,6 +17,11 @@ h3 {
     padding-right: 1rem;
 }
 
+h3:hover {
+    text-decoration: underline;
+    opacity: .5;
+}
+
 ul li {
     list-style-type: none;
     padding-bottom: 1rem;

@@ -16,7 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #F05454;
+    color: #00ffdd;
     font-weight: bold;
     font-family: 'Share Tech Mono', monospace;
 }
@@ -47,7 +47,7 @@ hr {
 }
 
 .name {
-    color: #F05454;
+    color: #00ffdd;
     font-size: 1.7rem;
     text-transform: uppercase;
     letter-spacing: .2rem;
@@ -70,7 +70,7 @@ hr {
 }
 
 .logs {
-    color: #F05454;
+    color: #00ffdd;
     float: left;
     text-transform: uppercase;
     letter-spacing: .2rem;
@@ -83,7 +83,7 @@ hr {
 
 .icon-links img {
     height: 1.1rem;
-    margin-top: .35rem;
+    margin-top: 10%;
     padding-left: .4rem;
     float: left;
 }
@@ -135,17 +135,16 @@ code {
 }
 
 .link {
-    color: #00ffdd;
+    color: #FFD369;
 }
 
 .article-title {
-    color: #F05454;
+    color: #00ffdd;
     text-decoration: none;
     letter-spacing: .1rem;
 }
 
 a.article-title:hover {
-    display: inline-flex;
     text-decoration: underline;
     opacity: .5;
 }

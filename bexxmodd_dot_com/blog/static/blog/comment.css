@@ -12,7 +12,7 @@ fieldset {
     border: none;
     font-family: 'VT323', monospace;
     font-size: inherit;
-    background-color: #F05454;
+    background-color: #00ffdd;
     cursor: pointer;
     padding: .5rem 1rem .5rem 1rem;
     display: inline-block;
@@ -24,7 +24,7 @@ fieldset {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
-    color: #fff;
+    color: #30475E;
 }
 
 .post-button:hover {
@@ -36,6 +36,11 @@ fieldset {
 }
 
 #id_body {
-    width: 90%;
-    height: 20rem;
+    width: 95%;
+    height: 25rem;
+}
+
+#id_name,
+#id_email {
+    width: 40%;
 }

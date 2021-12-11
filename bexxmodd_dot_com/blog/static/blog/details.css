@@ -15,7 +15,7 @@
 .tag-style {
     display: inline-block;
     padding: .25em .4em;
-    font-size: 75%;
+    font-size: 85%;
     font-weight: 700;
     line-height: 1;
     text-align: center;
@@ -23,13 +23,12 @@
     vertical-align: baseline;
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    color: #ddd;
-    background-color: #F05454;
+    color: #30475E;
+    background-color: #00ffdd;
     text-decoration: none;
 }
 
 .tag-style:hover {
-    color: #ddd;
     opacity: .5;
     cursor: pointer;
 }
@@ -39,8 +38,8 @@
 }
 
 applause-button {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 }
 
 .final-words h2 {
@@ -54,19 +53,19 @@ applause-button {
 
 .add-comment {
     font-family: 'VT323', monospace;
-    background-color: #F05454;
+    background-color: #00ffdd;
     cursor: pointer;
     padding: .5rem 1rem .5rem 1rem;
     display: inline-block;
     text-transform: uppercase;
-    margin-left: 1rem;
+    margin-left: 2rem;
     letter-spacing: .1rem;
     font-weight: 700;
     outline: none;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
-    color: #fff;
+    color: #30475E;
     display: inline-block;
     font-size: 1.5em;
     font-weight: bold;
@@ -80,7 +79,7 @@ applause-button {
 }
 
 .comments {
-    padding-left: .5rem;
+    padding-left: 2rem;
     padding-bottom: 1rem;;
     font-size: 1.3rem;
 }
@@ -91,8 +90,8 @@ applause-button {
 }
 
 .reactions {
-    height: 2em;
-    color: #f0cc2f;
+    height: 2rem;
+    color: #FFD369;
 }
 
 .comment-author {

@@ -11,7 +11,7 @@ from .views import (
 from . import views
 
 urlpatterns = [
-    path('blog/', PostListView.as_view(), name='blog-posts'),
+    path('log/', PostListView.as_view(), name='blog-posts'),
     path('post/<slug:slug>/<int:pk>', PostDetailView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<slug:slug>/<int:pk>/comment/',
