@@ -12,10 +12,20 @@
     text-transform: uppercase;
 }
 
+.post-stats {
+    display: block;
+    font-family: 'VT323', monospace;
+    color: #30475E;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: .5rem;
+}
+
 .tag-style {
     display: inline-block;
     padding: .25em .4em;
-    font-size: 85%;
+    font-size: 80%;
     font-weight: 700;
     line-height: 1;
     text-align: center;

@@ -83,7 +83,7 @@ hr {
 
 .icon-links img {
     height: 1.1rem;
-    margin-top: 10%;
+    margin-top: 17%;
     padding-left: .4rem;
     float: left;
 }
@@ -120,7 +120,7 @@ code {
 }
 
 .container {
-    max-width: 768px;
+    max-width: 780px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -142,7 +142,6 @@ code {
 .article-title {
     color: #00ffdd;
     text-decoration: none;
-    letter-spacing: .1rem;
 }
 
 a.article-title:hover {

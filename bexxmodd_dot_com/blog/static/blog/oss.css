@@ -27,6 +27,10 @@ ul li {
     padding-bottom: 1rem;
 }
 
+ul li:last-child {
+    padding-bottom: 0;
+}
+
 li div {
     display: flex;
 }
@@ -41,9 +45,11 @@ li a {
 }
 
 li p {
+    display: inline-block;
     font-family: 'Share Tech Mono', monospace;
     font-size: 1rem;
     color: #dddddd;
+    padding-right: 1rem;
 }
 
 .github-stats {

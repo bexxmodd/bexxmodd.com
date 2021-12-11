@@ -35,6 +35,7 @@
     </div>
 </section>
 
+<a class="post-stats">Views: {{ post.current_hit_count }}, Comments: {{ post.comments.count }}</a>
 
 <!-- Read comments -->
 <a class="add-comment" href="{% url 'comment-create' post.slug post.id %}">Add Comment</a>

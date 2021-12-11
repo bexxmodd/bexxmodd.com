@@ -18,8 +18,6 @@
             <a class="article-title" href="{% url 'post-detail' post.slug post.id %}">
                 {{ post.title }}
             </a>            
-            <small>Views: {{ post.current_hit_count }}</small>,
-            <small>Comments: {{ post.comments.count }}</small>
         </li>
     </ul>
     {% endfor %}
