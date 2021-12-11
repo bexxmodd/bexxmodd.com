@@ -1,6 +1,3 @@
-import json
-import requests
-
 from django.http.response import HttpResponse
 from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404
