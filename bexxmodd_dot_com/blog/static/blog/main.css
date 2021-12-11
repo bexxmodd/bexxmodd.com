@@ -136,6 +136,7 @@ code {
 
 .link {
     color: #FFD369;
+    text-decoration: underline;
 }
 
 .article-title {
@@ -164,7 +165,6 @@ a.article-title:hover {
 }
 
 .article-metadata a:hover {
-    color: #DDDDDD;
     text-decoration: none;
 }
 
