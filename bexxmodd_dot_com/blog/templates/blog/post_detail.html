@@ -19,7 +19,7 @@
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.slug object.id %}">Update</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.slug object.id %}">Delete</a> {% endif %}
         </div>
-        <p class="article-content">{{ object.content|safe }}</p>
+        <div>{{ object.content|safe }}</div>
     </div>
 </article>
 
