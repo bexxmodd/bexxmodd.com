@@ -1,0 +1,353 @@
+<h2>LLVM Infrastructure and Rust</h2>
+
+LLVM is the engine behind many programming languages. It's used by C, C++, Rust, Go, Swift and others. This log is all about LLVM and I'll explore following topics:
+<ul>
+    <li><a class="link" href="#p1">What is LLVM Infrastructure</a></li>
+    <li><a class="link" href="#p3">How LLVM Works</a></li>
+    <li><a class="link" href="#p4">LLVM's Program Structure</a></li>
+    <li><a class="link" href="#p5">LLVM and Rustc</a></li>
+</ul> 
+
+<br/>
+<h3 id="p1">What is LLVM Infrastructure</h3>
+
+<p>
+    LLVM Infrastructure is a collection of modular and reusable compiler and toolchain technologies. LLVM umbrella contains several sub-projects like Clang, C/C++/Objective-C compiler. Decades of research and improvement created an amazing tool for building languages and compilers, which some of the modern technologies are taking advantage of.
+</p>
+
+<p>
+    LLVM project started in 2000 at the University of Illinois at Urbana-Champaign, by Vikram Adve and Chris Lattner. LLVM's name initially was the acronym for <i>Low-Level Virtual Machine</i>. Even though modern LLVM Infrastructure has nothing to do with virtual machines the name remained unchanged. But the abbreviation itself was later removed and LLVM became the full name of the project.
+</p>
+
+<p>
+    The LLVM Project was released under the Open Source License. Later Lattner was hired by Apple, and the whole team was assigned to work on the LLVM system for several uses within Apple products. LLVM started to expending its features and grew into an umbrella project which combines LLVM IR, LLVM Debugger, and LLVM API C++ Library.
+</p>
+
+<p>
+    LLVM Compiler Framework is a modular and reusable compiler framework using LLVM infrastructure to provide the end-to-end compilation of code. It is used to build, optimize, sanitize, and produce intermediate code (IR) or binary (machine) code (BC). LLVM allows the translation of programming language code into the intermediate representation (IR) which can be converted into binary code (BC) for any given hardware architecture. IR language is independent of the source and target languages.
+</p>
+
+<p>
+    LLVM is used in multiple ways. The main way it can be used is as a compiler framework. Here you provide, what's called, the <i>front end</i> and the <i>back end</i>, or machine code and it produces the IR. This IR can be converted into binary code and linked into machine-dependent assembly language for the target platform.
+</p>
+
+<p>
+    LLVM's intermediate representation (IR) is a low-level programming language similar to assembly. But in addition to assembly, it provides better type annotation and human-friendly syntax. Also, IR uses an infinite set of registered instead of a predefined number of registers. We will explore IR's internal workings in a later segment.
+</p>
+
+
+<br/>
+
+<h3 id="p3">How LLVM Works</h3>
+
+<p>
+    As mentioned already LLVM is a modular and reusable compiler framework that supports multiple front-ends and back-ends. The lifecycle of the program consists of writing a source code and then compiling it into binary code for execution. Our point of interest is the compiler stage. When source code is compiled into binary it actually goes through several steps in a subsequent order.
+</p>
+
+<p>
+    The compilation process can be divided into three parts. Front-End, Optimization, Back-End (Fig. 1-a). The compilation process starts on the front end. First, <i>Pre-Processor</i> starts to organize the source code. This is the phase when external libraries are extended into the target source code. In Rust, this directive is defined by the <code>use</code> statement. A similar directive in C and C++ is <code>#include</code> statement.
+</p>
+
+<center>
+<p href=""><img src="https://i.imgur.com/CofrtbC.png" title="source: imgur.com" width="85%"/></p>
+<p>Figure 1-a. Program's Lifecycle</p>
+</center>
+
+<br/>
+<p>
+    Second, is <i>Parsing</i>. At this stage the code is evaluated for the syntatic errors and the <a class="link" href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</a> is built. Third step at the front-end compilation is <i>IR Generation</i>. At this step compiler converts AST to the intermediate representation (IR) and outputs the result.
+</p>
+
+<p>
+    At the <i>Optimization</i> stage the compiler performs various transformations and sanitization to the program. This improves program performance, secures it by preventing various bugs, and does some utility runs. Later we'll explore IR and look at some optimization passes that come with several compilers.
+</p>
+
+<p>
+    After the program is optimized it goes in the back-end stage. Here, <i>Compiler Back-End</i> converts IR to the target-specific assembly code. Then <i>Assembler</i> converts target-specific assembly code to target-specific machine code. And finally, <i>Linker</i> combines multiple machine code files into a single image, what we refer to as executable.
+</p>
+
+<p>
+    There are several language-specific Front ends. We have <i>clang</i> for <b>C</b> and <b>C++</b>, <b>Go</b> has <i>gollvm</i>, and <b>Rust</b>has it's compiler called <i>rustc</i>. Similarly after LLVM IR's optimization passes code is converted into architecture-specific back-ends, like x84, ARM, MIPS.
+</p>
+
+<p>
+    The part between the front-end and back-end, called optimizer is where the magic of code optimization and sanitization happens. This is done through the series of what's called <i>Pass</i>. Each <i>pass</i> run one after another and there can be N number of passes. Passes can be categorized into two groups: <b>Analysis</b> and <b>Transfromation</b>. Analysis pass analyzes IR to check program properties, while Transformation pass transforms IR to monitor and optimize the program.
+</p>
+
+<p>
+    When source code is converted into LLVM IR it can take one of three formats (Figure 1-b). <b>In-memory</b> format is a binary which is suitable for front-ends during the compilation process. Other two formats are <b>Bitcode</b> and <b>Assembly</b>. Bitcode is a binary on-disk stored format, suitable for fast loading as it's more memory efficient. Assembly is a textual format for human readability.
+</p>
+<p>
+<center>
+    <a href="https://imgur.com/GY2HcMK"><img src="https://i.imgur.com/GY2HcMK.png" title="source: imgur.com" width="75%"/></a>
+    <p>Figure 1-b. LLVM IR Formats</p>
+</center>
+</p>
+<br/>
+
+<br/>
+
+<h3 id="p4">LLVM's Program Structure</h3>
+
+<p>
+    LLVM IR, just like any other system, has its program structure (Fig. 2-a). The top-level container is a <b>Module</b> that corresponds to each translation unit of the front-end compiler. Module can consist of one or many <b>functions</b>. Each function has one or many <b>basic blocks</b>, which has instructions. <b>Instruction</b> is a single line and there are multiple instructions available in the IR language.
+</p>
+
+
+<p>
+    You may want to know why to use IR/BC instead of Native Assembly and Native binary? The reason is Native assembly has one-to-one binding to the platform's machine code. It depends on the target's architecture, for example, the program's assembly for the x84 and assembly for ARM will be different. Native assembly is turned into native binary via assembler, which features LLVM also includes. Here is <a class="link" href="https://github.com/llvm/llvm-project/blob/main/llvm/docs/Passes.rst">the extensive list of LLVM passes available out of box.</a> But that's not all of it, you can implement your passes to sanitize, or optimize source code.
+</p>
+
+<p>
+    You can get the <code>.ll</code> (IR assembly) file from your Rust source code by running following command in the terminal:
+</p>
+<p>
+    <code> $ rustc someprogram.rs --emit=llvm-ir -o somename.ll</code>
+</p>
+<p>
+    Here we tell to <code>rustc</code> compiler to give us llvm-ir (this is done by the flag <code>--emit=llvm-ir</code>) form for the <code>someprogram.rs</code> and output it (using option <code>-o</code>) as <code>someoname.ll</code>. Similarly, you can <i>emit</i> bitcode by using <code>--emit=llvm-bc</code> flag.
+</p>
+
+<p>
+    The actual program structure in LLVM IR consists of hierarchical containers. At the top level, you have <b>Module.</b> It corresponds to each translation unit of the front-end compiler. Modules may be combined with the LLVM linker, which merges function definitions. <b>Function</b> is a next-level container, that includes function signature and its basic blocks. <b>Basic Block</b> is a set of instructions that are executed sequentially. Basic blocks have one entry and one exit. The first block is called the entry block. Finally, IR has instructions. <b>Instructions</b> are a single line executables (Figure 2-a).
+</p>
+
+<center>
+<a href="https://imgur.com/YphTMST"><img src="https://i.imgur.com/YphTMST.png" title="source: imgur.com" /></a>
+<p>Figure 2-a. IR Program Structure</p>
+</center>
+
+<br/>
+<p>
+    In the IR file you'll encounter two kinds of variables, local variables, indicated with <code>%</code> symbol and global variables, indicated with <code>@</code> symbol. LLVM IR can use infinite number of temporary registers, instead of predefined number of registers, like native assemblers do. IR's registers are defined by integer numbers, like 1,2,3, etc. If you encounter <code>%2 = load i32, i32* %x</code> this means that value that is stored at the address of the local variable <code>x</code> is loaded into the temporary register <code>2</code>.
+</p>
+
+<p>
+    Another advantage of LLVM IR is that it utilizes what's called <a clas="link" href="https://en.wikipedia.org/wiki/Static_single_assignment_form">Static Single Assignment (SSA) form</a>. This allows various optimizations to be done on a code. Instead of regular variables that can be reassigned multiple times, SSA variables can only be assigned once. This allows compilers to do more efficient register allocation because it's easy to approximate a number of live variables at any given point. It can detect unused variables and prevent programs from unnecessary pointer allocation.
+</p>
+
+<p>
+    For example, the following code <code>x = x * x</code> in an SSA form will be <code>x_2 := x_1 * x_1</code>. If we get into the loop where the variable constantly gets a new value, SSA uses what's called Phi Nodes. Phi will merge the variables into the final value that will be returned or output from the branch or loop. We'll look at concrete examples and go over IR syntax in the next segment of this log.
+</p>
+
+<br/>
+
+<h3 id="p5">LLVM and Rustc</h3>
+
+<p>
+    The official guide to the Rustc development has all the reasons listed of why they are using LLVM, which I'm reciting directly:
+
+</p>
+<p> <i>
+    <ul>
+
+    <li>
+    We don't have to write a whole compiler backend. This reduces implementation and maintenance burden.
+    </li>
+    <li>
+    We benefit from the large suite of advanced optimizations that the LLVM project has been collecting.
+    </li>
+    <li>
+    We can automatically compile Rust to any of the platforms for which LLVM has support. For example, as soon as LLVM added support for wasm, voila! rustc, clang, and a bunch of other languages were able to compile to wasm! (Well, there was some extra stuff to be done, but we were 90% there anyway).
+    </li>
+    <li>
+    We and other compiler projects benefit from each other. For example, when the Spectre and Meltdown security vulnerabilities were discovered, only LLVM needed to be patched.
+    </li>
+    </ul>
+</i> </p>
+
+<p>
+    Now, as we got familiar with what LLVM IR is, what id does, and why so many compilers are built on it, it's time to get our hands dirty and explore IR's internals using a simple Rust program called <code>simple1.rs</code>:
+</p>
+<p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #75715e">//simple1.rs</span>
+
+<span style="color: #66d9ef">fn</span> <span style="color: #f8f8f2">square(x</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">u32</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">-&gt;</span> <span style="color: #66d9ef">u32</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #f8f8f2">x</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">x</span>
+<span style="color: #f8f8f2">}</span>
+
+<span style="color: #66d9ef">fn</span> <span style="color: #f8f8f2">factorial(</span><span style="color: #66d9ef">mut</span> <span style="color: #f8f8f2">n</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">u32</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">-&gt;</span> <span style="color: #66d9ef">u32</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">let</span> <span style="color: #66d9ef">mut</span> <span style="color: #f8f8f2">acc</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #66d9ef">u32</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">n</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">0</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">acc</span> <span style="color: #f92672">*=</span> <span style="color: #f8f8f2">n;</span>
+        <span style="color: #f8f8f2">n</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">n</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef"></span> <span style="color: #f8f8f2">acc</span>
+<span style="color: #f8f8f2">}</span>
+    
+<span style="color: #66d9ef">fn</span> <span style="color: #f8f8f2">main()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">let</span> <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">square(</span><span style="color: #ae81ff">4</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">let</span> <span style="color: #f8f8f2">f</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">factorial(s);</span>
+<span style="color: #f8f8f2">}</span>
+    </pre></div>
+    
+</pre></div>
+<br/>
+
+</p>
+
+<p>
+    Our program has three functions, <code>main</code> function that is an entry point in our program, <code>square</code> function that returns the square of the given number, and <code>factorial</code> that calculates factorial of the supplied integer. We output the LLVM IR file by invoking the following command in the terminal:
+</p>
+<p>
+    <code>>$ rustc simple1.rs --emit=llvm-ir</code>
+</p>
+
+<p>
+    Now we should have <code>simple1.ll</code> in the same folder as our source code. Let's open the <code>.ll</code> file in the text editor and start exploring. At the beginning of the file, you'll find a bunch of metadata and other information and directives related to the program, but we are interested in exploring how our Rust functions are translated into IR, and we'll start doing it by first looking at <code>square</code> function.
+</p>
+
+<p>
+    Search for the line which has a comment <code>simple1::square</code> and next to it you'll find the LLVM IR container of a give function. Which looks like this:
+</p>
+
+<p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #75715e">; simple1::square</span>
+<span style="color: #75715e">; Function Attrs: nonlazybind uwtable</span>
+<span style="color: #66d9ef">define</span> <span style="color: #66d9ef">internal</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">@_ZN7simple16square17h74fdb775aec225a0E(</span><span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%x)</span> <span style="color: #960050; background-color: #1e0010">unnamed_addr</span> <span style="color: #960050; background-color: #1e0010">#</span><span style="color: #ae81ff">1</span> <span style="color: #f8f8f2">{</span>
+<span style="color: #f8f8f2">start:</span>
+  <span style="color: #f8f8f2">%0</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">call</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">@llvm.umul.with.overflow.i32(</span><span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%x,</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%x)</span>
+  <span style="color: #f8f8f2">%_4.0</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">extractvalue</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">%0,</span> <span style="color: #ae81ff">0</span>
+  <span style="color: #f8f8f2">%_4.1</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">extractvalue</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">%0,</span> <span style="color: #ae81ff">1</span>
+  <span style="color: #f8f8f2">%1</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">call</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">@llvm.expect.i1(</span><span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">%_4.1,</span> <span style="color: #66d9ef">i1</span> <span style="color: #66d9ef">false</span><span style="color: #f8f8f2">)</span>
+  <span style="color: #66d9ef">br</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">%1,</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%panic,</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%bb1</span>
+
+<span style="color: #f8f8f2">bb1:</span>                                              <span style="color: #75715e">; preds = %start</span>
+  <span style="color: #66d9ef">ret</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%_4.0</span>
+
+<span style="color: #f8f8f2">panic:</span>                                            <span style="color: #75715e">; preds = %start</span>
+<span style="color: #75715e">; call core::panicking::panic</span>
+  <span style="color: #66d9ef">call</span> <span style="color: #66d9ef">void</span> <span style="color: #f8f8f2">@_ZN4core9panicking5panic17h50b51d19800453c0E([</span><span style="color: #ae81ff">0</span> <span style="color: #66d9ef">x</span> <span style="color: #66d9ef">i8</span><span style="color: #f8f8f2">]*</span> <span style="color: #f8f8f2">...</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+<br/>
+
+</p>
+<p>
+    IR starts by defining function with a randomly generated unique name (that also includes original function name in it) that returns i32 value and takes i32 value as a parameter. The <code>start</code> is the label for the entry point of the function. In the first instruction LLVM IR <code>call</code>s its intrinsic function <code>@llvm.umul.with.overflow.i32</code>. This function takes two i32 arguments (in this case both ar <code>x</code>), performs unsigned multiplication and outputs tuple-like result, where first value is i32 and the second value is i1. The result is assigned to a <i>unnamed temporary</i> <code>%0</code>.
+</p>
+
+<p>
+    You may ask here a couple of questions. First, why does the <code>square</code> function take and return the i32 value instead of the u32 value as was declared in the source code? LLVM IR doesn't provide separately defined data types for signed and unsigned values. Instead, it performs operations specific to the value type, signed operation for signed values, unsigned for unsigned. If our <code>square</code> function took i32 as an argument and returned i32, IR would have called <code>@llvm.smul.with.overflow.i32</code> instead, which is an intrinsic function for signed multiplication.
+</p>
+
+<p>
+    The next question you may ask is why does multiplying integer over integer returns a tuple? If you look at the types of the outputted tuple, the second item is an i1 (a single bit value), which is for binary/boolean values. The name of the called function suggests that it does unsigned multiplication with overflow. If the overflow is detected, that is multiplied value exceeds the maximum unsigned value 32 bits can hold, because we performed unsigned multiplication, it sets i1 to 1, e.g. <code>true</code>.
+</p>
+
+<p>
+    In two following instructions IR unpacks the result of multiplication. The <i>unnamed temporary</i> <code>%_4.0</code> takes the multiplied value and the boolean result is assigned to <code>%_4.1</code>. Next, IR calls another intrinsic function <code>@llvm.expect.i1(i1 %_4.1, i1 false)</code> where it expects value assigned to unnamed temporary <code>%_4.1</code> to be <code>false</code>. Program assigns evaluated result to another unnamed temporary <code>%1</code>. Unnamed temporaries are unsigned numeric values with prefix % or @ (example, <code>%1</code>) created by IR. Named values are represented as string characters with similar prefixes introduced from a source code (example <code>%acc</code>).
+</p>
+
+<p>
+    After that, IR performs branching. The <code>br</code> directive checks if the value placed in temporary <code>%1</code> is true, and if so jumps to <code>%panic</code>, otherwise to <code>%bb1</code>. Two above mentioned names are labels for the basic blocks. The <code>%panic</code> calls Rust's panic method (if you have programmed in Rust you should know what <code>panic </code> does), while <code>bb1</code> returns value stored in temporary <code>%_4.0</code> from the function <code>square</code>.
+</p>
+
+<p>
+    Now, let's look at our <code>factorial</code> function, as there are more interesting things happening:
+</p>
+
+<p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #75715e">; simple1::factorial</span>
+<span style="color: #75715e">; Function Attrs: nonlazybind uwtable</span>
+<span style="color: #66d9ef">define</span> <span style="color: #66d9ef">internal</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">@_ZN7simple19factorial17hceebae2a8a73b808E(</span><span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%0)</span> <span style="color: #960050; background-color: #1e0010">unnamed_addr</span> <span style="color: #960050; background-color: #1e0010">#</span><span style="color: #ae81ff">1</span> <span style="color: #f8f8f2">{</span>
+<span style="color: #f8f8f2">start:</span>
+  <span style="color: #f8f8f2">%acc</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">alloca</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #f8f8f2">%n</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">alloca</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #66d9ef">store</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%0,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%n,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #66d9ef">store</span> <span style="color: #66d9ef">i32</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%acc,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #66d9ef">br</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%bb1</span>
+
+<span style="color: #f8f8f2">bb1:</span>                                              <span style="color: #75715e">; preds = %bb4, %start</span>
+  <span style="color: #f8f8f2">%_3</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">load</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%n,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #f8f8f2">%_2</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">icmp</span> <span style="color: #66d9ef">ugt</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%_3,</span> <span style="color: #ae81ff">0</span>
+  <span style="color: #66d9ef">br</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">%_2,</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%bb2,</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%bb5</span>
+
+<span style="color: #f8f8f2">bb5:</span>                                              <span style="color: #75715e">; preds = %bb1</span>
+  <span style="color: #f8f8f2">%1</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">load</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%acc,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #66d9ef">ret</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%1</span>
+
+<span style="color: #f8f8f2">bb2:</span>                                              <span style="color: #75715e">; preds = %bb1</span>
+  <span style="color: #f8f8f2">%_4</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">load</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%n,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #f8f8f2">%2</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">load</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%acc,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #f8f8f2">%3</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">call</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">@llvm.umul.with.overflow.i32(</span><span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%2,</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%_4)</span>
+  <span style="color: #f8f8f2">%_5.0</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">extractvalue</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">%3,</span> <span style="color: #ae81ff">0</span>
+  <span style="color: #f8f8f2">%_5.1</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">extractvalue</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">%3,</span> <span style="color: #ae81ff">1</span>
+  <span style="color: #f8f8f2">%4</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">call</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">@llvm.expect.i1(</span><span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">%_5.1,</span> <span style="color: #66d9ef">i1</span> <span style="color: #66d9ef">false</span><span style="color: #f8f8f2">)</span>
+  <span style="color: #66d9ef">br</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">%4,</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%panic,</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%bb3</span>
+
+<span style="color: #f8f8f2">bb3:</span>                                              <span style="color: #75715e">; preds = %bb2</span>
+  <span style="color: #66d9ef">store</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%_5.0,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%acc,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #f8f8f2">%_6</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">load</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%n,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #f8f8f2">%5</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">call</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">@llvm.usub.with.overflow.i32(</span><span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%_6,</span> <span style="color: #66d9ef">i32</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+  <span style="color: #f8f8f2">%_7.0</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">extractvalue</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">%5,</span> <span style="color: #ae81ff">0</span>
+  <span style="color: #f8f8f2">%_7.1</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">extractvalue</span> <span style="color: #f8f8f2">{</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">%5,</span> <span style="color: #ae81ff">1</span>
+  <span style="color: #f8f8f2">%6</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">call</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">@llvm.expect.i1(</span><span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">%_7.1,</span> <span style="color: #66d9ef">i1</span> <span style="color: #66d9ef">false</span><span style="color: #f8f8f2">)</span>
+  <span style="color: #66d9ef">br</span> <span style="color: #66d9ef">i1</span> <span style="color: #f8f8f2">%6,</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%panic1,</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%bb4</span>
+
+<span style="color: #f8f8f2">panic:</span>                                            <span style="color: #75715e">; preds = %bb2</span>
+<span style="color: #75715e">; call core::panicking::panic</span>
+  <span style="color: #66d9ef">call</span> <span style="color: #66d9ef">void</span> <span style="color: #f8f8f2">@_ZN4core9panicking5panic17h50b51d19800453c0E</span> <span style="color: #f8f8f2">...</span>
+
+<span style="color: #f8f8f2">bb4:</span>                                              <span style="color: #75715e">; preds = %bb3</span>
+  <span style="color: #66d9ef">store</span> <span style="color: #66d9ef">i32</span> <span style="color: #f8f8f2">%_7.0,</span> <span style="color: #66d9ef">i32</span><span style="color: #f8f8f2">*</span> <span style="color: #f8f8f2">%n,</span> <span style="color: #66d9ef">align</span> <span style="color: #ae81ff">4</span>
+  <span style="color: #66d9ef">br</span> <span style="color: #66d9ef">label</span> <span style="color: #f8f8f2">%bb1</span>
+
+<span style="color: #f8f8f2">panic1:</span>                                           <span style="color: #75715e">; preds = %bb3</span>
+<span style="color: #75715e">; call core::panicking::panic</span>
+  <span style="color: #66d9ef">call</span> <span style="color: #66d9ef">void</span> <span style="color: #f8f8f2">@_ZN4core9panicking5panic17h50b51d19800453c0E</span>  <span style="color: #f8f8f2">...</span>
+</pre></div>
+    
+</p>
+<br/>
+
+<p>
+    Recall that as an argument, <code>factorial</code> takes mutable u32 value, which in IR is defined as a unnamed temporary <code>%0</code>. While function <code>square</code>'s definition takes named variable <code>%n</code> as an argument, just like in a source code. This is because square never modifies its value, while <code>factorial</code> requires it to be mutable, and later makes argument's copy inside a function's scope. At the start of the function two named variables are defined <code>%n</code> and <code>%acc</code>. Each of them gets the allocated (with <code>alloca</code> call) 32 bits of memory with data alignment of 4 bytes. You can read more about memory alignment <a class="link" href="https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/">here</a>.
+</p>
+
+
+<p>
+    Aftter allocation, <code>store</code> instruction stores content laying in <code>%0</code> temporary in the address of <code>%n</code>. In the address of <code>%acc</code> it stores constant value of 1. Finally, it jumps to the entry point of a while loop. The <code>bb1</code> label marks entry into the while condition. IR loads value stored at the address of <code>%n</code> into temporary <code>%_3</code> and makes comparison between it and constant value 0. <code>icmp</code> checks if value stored at <code>%_3</code> is unsigned greater than (<code>ugt</code>) 0 and assigns result to another temporary <code>%_2</code>. After that, it evaluates contents of <code>%_2</code>. If it's true, branch jumps to the label <code>%bb2</code> if false - to label <code>%bb5</code>.
+</p>
+
+<p>
+    The <code>bb5</code> label is marks the exit block of the while loop. Here it loads the value from the address of <code>%acc</code> into temporary <code>%1</code> and returns it from the function. The label <code>bb2</code> is the entry into the body of a while loop. The body of a while loop is split in two halves. First one, responsible for the multiplication operation (<code>bb2</code> label) and the second one responsible for decrementing <code>n</code>, or subtraction operation. The operation <code>n = n - 1</code> is done by calling another intrinsic function for unsigned subtraction. The rest are the same operations as we saw in <code>square</code> function (Fig 4-a).
+</p>
+
+<center>
+    <a href="https://imgur.com/Rb7zvTN"><img src="https://i.imgur.com/Rb7zvTN.png" title="source: imgur.com" width="90%"/></a>
+    <p>Figure 4-a. Control Flow Graph & Basic Blocks</p>
+</center>
+<br/>
+
+<p>
+    You'd noticed the SSA form in action here. For every assignment instruction, instead of reassigning value back to <code>n</code> and <code>acc</code>, as it's defined in the source code, IR introduces new unnamed temporary for each instruction. Numbering of unnamed temporaries are incremented within a function at each instance when they are spawned, starting from 0.
+</p>
+
+<p>
+    LLVM IR supports Two's Complement of binary numbers. It has data types for integers like i8, i16, i32, i64 and floats f16, f32, etc. which are refered es operands. If you see an asterisk symbol after integer type that means we are dealing with a pointer (example: i32*). Value can also be constants. Each instruction also has its types, for example, arithmetic operators, binary comparison, data stores and loads. There is much more of what IR performs and you can find the full list on the link at the end of this section.
+</p>
+
+<p>
+    The class hierarchy of LLVM is little bit complicated. The base object is what's called <code>Value</code>, that is used to represent a SSA register. All the other classes inherit from it. Then comes <code>User</code> class followed by <code>Instruction</code>, <code>Operator</code>, <code>Constant</code> classes and so on (Fig. 4-b). Here is the <a class="link" href="https://llvm.org/doxygen/classllvm_1_1Value.html">full tree of class inheritance</a> inside LLVM.
+</p>
+
+<center>
+    <a href="https://imgur.com/qjLmuFW"><img src="https://i.imgur.com/qjLmuFW.png" title="source: imgur.com" width="95%"/></a>
+    <p>Figure 4-b. LLVM Class Hierarchy</p>
+</center>
+<br/>
+
+<p>
+    LLVM Language has many high level structures, types, constants, functions, codegen instructions, etc. If you are interested learning more about it you can scroll through the <a class="link" href="https://llvm.org/docs/LangRef.html">reference manual</a>.
+</p>
+
+<br/>
+
+<h3>Summary</h3>
+
+<p>
+    As we reviewed in this article LLVM IR has many use-cases and allows use to analyze and optimize source code through its passes. Knowing IR language itself will help us to write our own passes and build projects around it for debugging, testing, optimizing. Currently LLVM IR doesn't have Rust API. It's mainly used through C++ library. However, some user-created repos are available on crates.io. There is a Rust binding to LLVM's C API - <a class="link" href="https://lib.rs/crates/llvm-sys">llvm-sys</a> and two other, more Rusty APIs that are using LLVM: <a class="link" href="https://github.com/TheDan64/inkwell">inkwell</a> and <a class="link" href="https://github.com/cdisselkoen/llvm-ir">llvm-ir</a>. And finally, if you want to learn how to write a LLVM pass you should start <a class="link" href="https://github.com/cdisselkoen/llvm-ir">here</a>.
+</p>
+<br/>
+<br/>

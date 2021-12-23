@@ -38,6 +38,14 @@
     text-decoration: none;
 }
 
+li {
+    padding-bottom: .5rem;
+}
+
+p {
+    padding-bottom: 1rem;
+}
+
 .tag-style:hover {
     opacity: .5;
     cursor: pointer;

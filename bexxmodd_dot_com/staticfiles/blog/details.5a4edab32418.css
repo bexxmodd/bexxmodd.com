@@ -39,11 +39,7 @@
 }
 
 li {
-    padding-bottom: .5rem;
-}
-
-p {
-    margin-bottom: .3rem;
+    padding-bottom: 1rem;
 }
 
 .tag-style:hover {

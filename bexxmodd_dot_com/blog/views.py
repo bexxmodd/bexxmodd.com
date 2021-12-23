@@ -98,9 +98,6 @@ def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
 
 
-def resume(request):
-    return render(request, 'blog/resume.html', {'title': 'Resume'})
-
 def blog_like(request, pk):
     post = get_object_or_404(Post, id=request.POST.get("post_id"))
     post.claps.add(request)
