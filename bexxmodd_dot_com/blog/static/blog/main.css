@@ -126,7 +126,7 @@ code {
 }
 
 .content-section {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'fira code', monospace;
     font-size: 1rem;
     background: #222831;
     padding: 1rem 1.5rem 1rem 1.5rem;

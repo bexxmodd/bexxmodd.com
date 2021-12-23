@@ -42,7 +42,7 @@
 
 li {
     padding-bottom: 1rem;
-    list-style-type: square;
+    text-decoration: none;
 }
 
 p {

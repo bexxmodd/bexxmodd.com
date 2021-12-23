@@ -1,5 +1,4 @@
 .title {
-    font-family: 'Share Tech Mono', monospace;
     font-size: 2rem;
     color: #dddddd;
     padding-top: .5rem;
@@ -42,7 +41,6 @@
 
 li {
     padding-bottom: 1rem;
-    list-style-type: square;
 }
 
 p {
