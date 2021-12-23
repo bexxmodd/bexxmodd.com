@@ -38,6 +38,9 @@ class PostDetailView(HitCountDetailView):
         })
         return context
 
+    def get_page_title(self, context):
+        print(context["model"].title)
+        return context["model"].title
 
 class CommentView(DetailView):
     model = Comment
@@ -77,7 +80,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    success_url = '/blog/'
+    success_url = '/log/'
 
     def test_func(self) -> bool:
         post = self.get_object()
