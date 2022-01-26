@@ -39,7 +39,7 @@ class PostDetailView(HitCountDetailView):
         return context
 
     def get_page_title(self, context):
-        print(context["model"].title)
+        print(context.title)
         return context["model"].title
 
 class CommentView(DetailView):
