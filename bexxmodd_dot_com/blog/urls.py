@@ -21,5 +21,5 @@ urlpatterns = [
     path('', views.about, name='blog-about'),
     path('oss/', views.oss, name='blog-oss'),
     path('tag/<slug:tag_slug>', views.tagged, name='posts-by-tag'),
-    path('.well-known/acme-challenge/Ac33xi-K38WponeuBfLHT-jqLxJWTzzHz3S4mR2C95Q', views.read_file),
+    path('.well-known/acme-challenge/o4Xzl1oYuVDdgNC2OnZtt5GFV-TRNA1hsTLGzxvJMBw', views.read_file),
 ]
