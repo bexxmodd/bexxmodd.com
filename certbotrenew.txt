@@ -1,7 +1,7 @@
 1. renew with following command:
-    certbot certonly --manual -d www.bexxmodd.com
+    sudo certbot certonly --manual -d www.bexxmodd.com
 
-2. update url routing for new address with new key value in it
+2. update url.py routing for new address nd static/docu/certbot file with new key in it
 
 3. upload certs to heroku with following command:
-    sudo heroku certs:add /etc/letsencrypt/live/www.bexxmodd.com/fullchain.pem /etc/letsencrypt/live/www.bexxmodd.com/privkey.pem
+    sudo heroku certs:add -a bexxmodd /etc/letsencrypt/live/www.bexxmodd.com/fullchain.pem /etc/letsencrypt/live/www.bexxmodd.com/privkey.pem
